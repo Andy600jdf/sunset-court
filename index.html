@@ -127,15 +127,40 @@ body.practice .scoreboard>#score1,body.practice .scoreboard>.away{display:none}b
 .dual-touch #touch-stick,.dual-touch .second-stick{width:128px;height:128px;bottom:32px}.dual-touch #touch-knob,.dual-touch #touch-knob2{left:35px;top:35px}.dual-touch #touch-stick{border-color:#82d9ff99;background:radial-gradient(circle,#39648a66,#132834bb)}.dual-touch #touch-stick>span{font-size:0}.dual-touch #touch-stick>span:after{content:'玩家一移动';font-size:10px;color:#bfe8ff}.dual-touch #touch-controls>.touch-actions{left:170px;right:auto;grid-template-columns:repeat(2,66px);gap:8px;bottom:24px}.dual-touch .second-actions{left:auto;right:170px;grid-template-columns:repeat(2,66px);gap:8px;bottom:24px}.dual-touch .touch-actions button{height:67px;font-size:14px;border-radius:18px}.dual-touch .touch-actions .touch-shot{height:67px}.dual-touch [data-touch="pass"],.dual-touch [data-touch="switch"]{display:none}.dual-touch .second-actions button{border-color:#eeb67488;background:#38281ddd}.dual-touch .second-actions .touch-shot{background:#ffcf8d;color:#462907}.dual-touch .second-actions .touch-shot small{color:#624018}.dual-touch .player-status{bottom:221px!important;left:22px;width:220px!important}.dual-touch .player-status.right{display:flex!important;left:auto;right:22px;text-align:right;width:220px!important}.dual-touch .player-status.right .skill-meter button{text-align:right}.dual-touch #touch-camera{bottom:50px}.dual-touch #feedback{bottom:195px}.dual-touch #gas-art{top:120px}.dual-touch .match-side{max-width:210px}.dual-touch #shotmeter{transform:scale(.86);transform-origin:top left}
 @media(max-width:850px){.dual-touch #touch-stick,.dual-touch .second-stick{width:104px;height:104px;bottom:35px}.dual-touch #touch-stick{left:14px}.dual-touch .second-stick{right:14px}.dual-touch #touch-knob,.dual-touch #touch-knob2{left:23px;top:23px}.dual-touch #touch-controls>.touch-actions{left:132px;grid-template-columns:repeat(2,57px);gap:7px}.dual-touch .second-actions{right:132px;grid-template-columns:repeat(2,57px);gap:7px}.dual-touch .touch-actions button,.dual-touch .touch-actions .touch-shot{height:60px;font-size:12px}.dual-touch .player-status{width:190px!important}.dual-touch .player-status.right{width:190px!important}.dual-touch #touch-p1-name{left:14px;bottom:166px}.dual-touch #touch-p2-name{right:14px;bottom:166px}.dual-touch #touch-camera{bottom:20px}}
 
+
+/* Larger touch targets, including the two independent local-player pads. */
+#touch-stick,.second-stick{width:196px;height:196px;overflow:visible}
+#touch-stick:before,.second-stick:before{content:'';position:absolute;inset:-14px;border-radius:50%}
+#touch-knob,#touch-knob2{width:68px;height:68px;left:calc(50% - 36px);top:calc(50% - 36px);pointer-events:none}
+.touch-mode .player-status{bottom:252px!important}.touch-mode #feedback{bottom:246px}
+.touch-actions .touch-shot{min-height:88px;min-width:82px}
+.dual-touch #touch-stick,.dual-touch .second-stick{width:168px;height:168px}
+.dual-touch #touch-knob,.dual-touch #touch-knob2{left:calc(50% - 36px);top:calc(50% - 36px)}
+.dual-touch #touch-controls>.touch-actions{left:216px;grid-template-columns:repeat(2,72px)}
+.dual-touch .second-actions{right:216px;grid-template-columns:repeat(2,72px)}
+.dual-touch .touch-actions .touch-shot{min-width:0;min-height:74px}.dual-touch .touch-actions button{height:74px}
+.dual-touch .dual-name{bottom:218px}.dual-touch .player-status{bottom:250px!important}
+@media(max-width:850px){
+ #touch-stick{width:164px;height:164px}#touch-knob,#touch-knob2{width:60px;height:60px;left:calc(50% - 32px);top:calc(50% - 32px)}
+ .touch-mode .player-status{bottom:220px!important}.touch-mode #feedback{bottom:218px}
+ .touch-actions .touch-shot{min-width:0;min-height:78px}
+ .dual-touch #touch-stick,.dual-touch .second-stick{width:140px;height:140px}
+ .dual-touch #touch-stick:before,.dual-touch .second-stick:before{inset:-8px}
+ .dual-touch #touch-knob,.dual-touch #touch-knob2{left:calc(50% - 32px);top:calc(50% - 32px)}
+ .dual-touch #touch-controls>.touch-actions{left:178px;grid-template-columns:repeat(2,57px)}
+ .dual-touch .second-actions{right:178px;grid-template-columns:repeat(2,57px)}
+ .dual-touch .touch-actions button,.dual-touch .touch-actions .touch-shot{height:64px;min-height:64px}
+ .dual-touch #touch-p1-name,.dual-touch #touch-p2-name{bottom:192px}.dual-touch .player-status{bottom:224px!important}
+}
 </style>
 </head>
 <body>
   <div id="gas-art" aria-hidden="true"><span class="gas-kicker">GAS ATTACK / 张天添</span><b>wjy</b><i>臭 气 冲 天</i></div>
   <div id="touch-controls" aria-label="触控操作" hidden>
     <div id="touch-stick" role="group" aria-label="拖动摇杆移动"><span>移动</span><i id="touch-knob"></i></div>
-    <div class="touch-actions"><button data-touch="skill">技能<small id="touch-energy">0 / 3</small></button><button data-touch="sprint">冲刺<small>按住</small></button><button data-touch="move">变向<small>无球抢断</small></button><button data-touch="pass">传球<small>找空位</small></button><button data-touch="switch">换人<small>防守切换</small></button><button data-touch="shoot" class="touch-shot">投篮<small>按住 · 松手</small></button></div>
+    <div class="touch-actions"><button data-touch="skill">技能<small id="touch-energy">0 / 3</small></button><button data-touch="sprint">冲刺<small>按住</small></button><button data-touch="move">变向<small>无球抢断</small></button><button data-touch="pass">传球<small>找空位</small></button><button data-touch="switch">换人<small>防守切换</small></button><button data-touch="shoot" class="touch-shot"><span class="touch-shot-label">投篮</span><small>按住 · 松手</small></button></div>
     <span id="touch-p1-name" class="dual-name">P1</span>
-    <div id="touch-player2" hidden><span id="touch-p2-name" class="dual-name">P2</span><div id="touch-stick2" class="second-stick" role="group" aria-label="玩家二摇杆"><span>玩家二移动</span><i id="touch-knob2"></i></div><div class="touch-actions second-actions"><button data-touch-player="1" data-touch="skill">技能<small id="touch-energy2">0 / 3</small></button><button data-touch-player="1" data-touch="sprint">冲刺<small>按住</small></button><button data-touch-player="1" data-touch="move">变向<small>无球抢断</small></button><button data-touch-player="1" data-touch="shoot" class="touch-shot">投篮<small>按住 · 松手</small></button></div></div>
+    <div id="touch-player2" hidden><span id="touch-p2-name" class="dual-name">P2</span><div id="touch-stick2" class="second-stick" role="group" aria-label="玩家二摇杆"><span>玩家二移动</span><i id="touch-knob2"></i></div><div class="touch-actions second-actions"><button data-touch-player="1" data-touch="skill">技能<small id="touch-energy2">0 / 3</small></button><button data-touch-player="1" data-touch="sprint">冲刺<small>按住</small></button><button data-touch-player="1" data-touch="move">变向<small>无球抢断</small></button><button data-touch-player="1" data-touch="shoot" class="touch-shot"><span class="touch-shot-label">投篮</span><small>按住 · 松手</small></button></div></div>
     <button id="touch-camera" aria-label="切换镜头">镜头 ↻</button>
   </div>
   <canvas id="game" aria-label="3D 篮球球场"></canvas>
@@ -154,7 +179,7 @@ body.practice .scoreboard>#score1,body.practice .scoreboard>.away{display:none}b
       <div class="random-picks"><button id="random-one">⚄ 随机当前角色</button><button id="random-all">⚄ 随机全部阵容</button></div><div id="team-slots" class="team-slots hidden"></div><div class="roster-nav"><span>18 位球星 · 游戏综合评级 · 自选 / 随机</span><span><button id="roster-prev" aria-label="上一组球星">‹</button> <button id="roster-next" aria-label="下一组球星">›</button></span></div><div id="roster-grid" class="roster-grid" aria-label="十八位球星"></div><div id="roster-detail" class="roster-detail"></div>
       <div class="roster-rule" id="roster-rule"></div><p id="roster-match" class="roster-match"></p>
     </section>
-    <div class="bottom-note"><span>OFFLINE / V10.1 · FULL COURT</span><span>键盘 / 触控 · 耳机体验更佳</span><span>EST. 2026</span></div>
+    <div class="bottom-note"><span>OFFLINE / V10.2 · TOUCH UPDATE</span><span>键盘 / 触控 · 耳机体验更佳</span><span>EST. 2026</span></div>
   </main>
 
   <section id="hud" class="hidden" aria-label="比赛信息">
@@ -840,7 +865,7 @@ const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),lerp=(a,b,t)=>a+(b-a)*t;
 let world;try{world=CourtWorld.create($('game'));}catch(e){$('error').classList.remove('hidden');$('error-text').textContent='无法初始化 3D 画面。请用 Chrome 或 Safari 打开，并启用浏览器图形加速。'+e.message;console.error(e);return;}
 const {scene,camera,renderer,athletes,ball,hoop,net}=world;
 let inputMode=matchMedia('(pointer:coarse)').matches||navigator.maxTouchPoints>1?'touch':'keyboard';try{inputMode=localStorage.getItem('after-hours-input')||inputMode;}catch(e){}
-const touch={x:0,y:0,sprint:false,stickId:null,shotId:null,buttons:new Map()},touch2={x:0,y:0,sprint:false,stickId:null,shotId:null};
+const touch={x:0,y:0,sprint:false,stickId:null,blockRequest:null,shotId:null,buttons:new Map()},touch2={x:0,y:0,sprint:false,stickId:null,blockRequest:null,shotId:null};
 const keys=new Set(),STEP=1/120,BALL_R=.12,RIM_R=.2286,GRAVITY=9.81;
 let state='menu',mode='ai',difficulty='pro',owner=0,cleared=true,lastOwner=0,shot=null,shotClock=24,gameTime=0,menuTime=0,resetDelay=0,resetTo=0,toastTime=0,feedbackTime=0,camMode=0,cameraShake=0,shotSerial=0,soundEnabled=true,audio=null,lastBounce=0,returnFlight=null,meterFeedback=null;
 let freeThrows=null,signatureAction=null,royalBlockAction=null,magnetFlight=null;
@@ -1234,7 +1259,7 @@ function releaseShot(p){
   if(isHuman(p.id)){const label=isDunk?'直接起跳扣篮':perfect?(s.contest>.35?'完美时机 · 受干扰':'完美出手'):error<-.16?'出手过早':error<0?'稍早出手':error>.16?'出手过晚':'稍晚出手';releaseFeedback(label,`${isDunk?'篮下终结':profile.label} · ${Math.round(s.contest*100)}% 干扰 · ${Math.round(p.stamina*100)}% 体力`,perfect);}
   if(perfect)world.burst(ballPos);sound('grip',.12);
 }
-function doBlock(p){if(freeThrows||signatureAction||resetDelay>0)return;if(p.jump>.02||p.block>0||p.stun>0||p.stamina<.08)return;p.jumpV=starOf(p).vertical;p.block=.40+starOf(p).defense*.003;p.stamina=clamp(p.stamina-.105*(.60*(starOf(p).staminaUse||1)),0,1);noise(.09,.026,1300);}
+function doBlock(p){if(freeThrows||signatureAction||resetDelay>0)return;if(p.jump>.02||p.block>0||p.stun>0||p.stamina<.08)return;p.jumpV=starOf(p).vertical;p.block=.40+starOf(p).defense*.003;p.stamina=clamp(p.stamina-.105*(.60*(starOf(p).staminaUse||1)),0,1);noise(.09,.026,1300);return true;}
 function doMove(p){
   if(freeThrows||signatureAction)return;
   if(state!=='playing'||resetDelay>0||p.stun>0||p.jump>.08)return;
@@ -1573,6 +1598,7 @@ function update(dt){
       if(mode==='practice')returnPracticeBall();else resetPossession(resetTo,false);
     }return;
   }
+  updateTouchBlocks(dt);
   const inputs=players.map(p=>isTeamMode()?(isHuman(p.id)?humanInput(p):teamAIInput(p,dt)):p.id===0?humanInput(p):mode==='ai'?aiInput(dt):humanInput(p));
   if(signatureAction||freeThrows)return;
   players.forEach((p,i)=>{if(mode==='practice'&&i===1)return;updatePlayer(p,inputs[i],dt);});separatePlayers();updateBall(dt);
@@ -1696,7 +1722,7 @@ document.querySelector('.brand').onclick=e=>{e.preventDefault();if(state==='play
 $('quality').onchange=()=>world.quality($('quality').value);
 function touchStateFor(p){return mode==='pvp'&&p.id===1?touch2:touch;}
 function resetTouch(){
-  for(const [i,t] of [touch,touch2].entries()){t.x=t.y=0;t.sprint=false;t.stickId=null;if(t.shotId!==null&&playerPool[t.shotId]){playerPool[t.shotId].charge=null;playerPool[t.shotId].chargeProfile=null;}t.shotId=null;const knob=$(i?'touch-knob2':'touch-knob');if(knob)knob.style.transform='translate(0px,0px)';}
+  for(const [i,t] of [touch,touch2].entries()){t.x=t.y=0;t.sprint=false;t.stickId=null;t.blockRequest=null;if(t.shotId!==null&&playerPool[t.shotId]){playerPool[t.shotId].charge=null;playerPool[t.shotId].chargeProfile=null;}t.shotId=null;const knob=$(i?'touch-knob2':'touch-knob');if(knob)knob.style.transform='translate(0px,0px)';}
   touch.buttons.clear();document.querySelectorAll('[data-touch]').forEach(b=>b.classList.remove('pressed'));
 }
 function syncTouchUI(){
@@ -1704,16 +1730,35 @@ function syncTouchUI(){
 }
 function inputHint(){
   const menuMode=document.querySelector('.mode.selected').dataset.mode;
-  $('input-hint').textContent=inputMode==='touch'?(menuMode==='pvp'?'双人触控：左侧玩家一，右侧玩家二，各自摇杆与按键；建议 iPad 横屏。':'左摇杆移动 · 按住投篮、绿区松手 · iPad 横屏体验更佳。'):'WASD 移动 · 按住投篮键、绿区松手 · 双人对战共用键盘。';
+  $('input-hint').textContent=inputMode==='touch'?(menuMode==='pvp'?'双人触控：左侧玩家一，右侧玩家二，各自摇杆与按键；建议 iPad 横屏。':'大摇杆移动 · 进攻按住投篮、绿区松手 · 防守轻点盖帽立即起跳。'):'WASD 移动 · 按住投篮键、绿区松手 · 双人对战共用键盘。';
 }
 function setInputMode(value){
   resetTouch();inputMode=value==='touch'?'touch':'keyboard';try{localStorage.setItem('after-hours-input',inputMode);}catch(e){}
   document.querySelectorAll('[data-input]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.input===inputMode)));
   const pvp=document.querySelector('.mode[data-mode="pvp"]');pvp.disabled=false;pvp.title='键盘或左右双人触控';inputHint();syncTouchUI();drawRoster();
 }
+function requestTouchBlock(p,t){
+  t.blockRequest={id:p.id,ttl:.22};tryTouchBlock(t);
+}
+function tryTouchBlock(t){
+  const request=t.blockRequest;if(!request)return;
+  const p=players[request.id];
+  if(!p||!isHuman(p.id)||p.held||state!=='playing'||resetDelay>0||signatureAction||freeThrows||p.stun>0||p.stamina<.08){t.blockRequest=null;return;}
+  if(p.jump>.02||p.block>0)return;
+  // Face the live ball when tapping block, even while the movement pad is idle.
+  const target=owner>=0?players[owner]:ballPos;p.yaw=Math.atan2(target.x-p.x,target.z-p.z);
+  if(doBlock(p))t.blockRequest=null;
+}
+function updateTouchBlocks(dt){
+  if(inputMode!=='touch')return;
+  for(const t of [touch,touch2]){if(!t.blockRequest)continue;t.blockRequest.ttl-=dt;if(t.blockRequest.ttl<=0)t.blockRequest=null;else tryTouchBlock(t);}
+}
 function updateTouchHUD(){
   if(inputMode!=='touch'||state!=='playing')return;
-  for(const slot of (mode==='pvp'?[0,1]:[0])){const p=players[isTeamMode()?controlledId:slot],suffix=slot?'2':'';$('touch-energy'+suffix).textContent=p.energy+' / '+energyMax(p);const skill=document.querySelector(`[data-touch="skill"][data-touch-player="${slot}"]`);skill.classList.toggle('ready',p.energy===energyMax(p));}
+  for(const slot of (mode==='pvp'?[0,1]:[0])){const p=players[isTeamMode()?controlledId:slot],suffix=slot?'2':'';$('touch-energy'+suffix).textContent=p.energy+' / '+energyMax(p);const skill=document.querySelector(`[data-touch="skill"][data-touch-player="${slot}"]`);skill.classList.toggle('ready',p.energy===energyMax(p));
+    const button=document.querySelector(`[data-touch="shoot"][data-touch-player="${slot}"]`),defending=!p.held,label=defending?'盖帽':'投篮',hint=defending?'轻点立即起跳':'按住 · 松手';
+    if(button.querySelector('.touch-shot-label').textContent!==label){button.querySelector('.touch-shot-label').textContent=label;button.querySelector('small').textContent=hint;button.setAttribute('aria-label',label+' · '+hint);}
+  }
   document.querySelector('[data-touch="pass"]').disabled=!isTeamMode()||owner!==controlledId||!!signatureAction||!!freeThrows||resetDelay>0;
   document.querySelector('[data-touch="switch"]').disabled=!isTeamMode()||owner>=0&&teamOf(owner)===0||!!passFlight||!!signatureAction||!!freeThrows||resetDelay>0;
   $('touch-p1-name').textContent='P1 · '+names[0];$('touch-p2-name').textContent='P2 · '+names[1];
@@ -1738,9 +1783,9 @@ for(const [slot,stickId,knobId] of [[0,'touch-stick','touch-knob'],[1,'touch-sti
 document.querySelectorAll('[data-touch]').forEach(button=>{
   const slot=Number(button.dataset.touchPlayer||0);button.dataset.touchPlayer=String(slot);const t=slot?touch2:touch;
   button.addEventListener('pointerdown',e=>{if(state!=='playing'||inputMode!=='touch'||button.disabled||slot&&mode!=='pvp')return;const action=button.dataset.touch;if([...touch.buttons.values()].some(v=>v.action===action&&v.slot===slot))return;e.preventDefault();button.setPointerCapture(e.pointerId);button.classList.add('pressed');const p=players[isTeamMode()?controlledId:slot];touch.buttons.set(e.pointerId,{action,button,id:p.id,slot});
-    if(action==='shoot'){t.shotId=p.id;startCharge(p);}else if(action==='move')doMove(p);else if(action==='sprint')t.sprint=true;else if(action==='skill')activateSkill(p);else if(action==='switch')switchDefender();else if(action==='pass'){const q=bestPassTarget(p);if(q)passBall(p,q.id);}
+    if(action==='shoot'){if(p.held){t.blockRequest=null;t.shotId=p.id;startCharge(p);}else requestTouchBlock(p,t);}else if(action==='move')doMove(p);else if(action==='sprint')t.sprint=true;else if(action==='skill')activateSkill(p);else if(action==='switch')switchDefender();else if(action==='pass'){const q=bestPassTarget(p);if(q)passBall(p,q.id);}
   });
-  const end=e=>{const entry=touch.buttons.get(e.pointerId);if(!entry)return;touch.buttons.delete(e.pointerId);entry.button.classList.remove('pressed');if(entry.action==='sprint')t.sprint=false;if(entry.action==='shoot'){const p=playerPool[entry.id];t.shotId=null;if(e.type==='pointerup'&&state==='playing')releaseShot(p);else{p.charge=null;p.chargeProfile=null;}}};
+  const end=e=>{const entry=touch.buttons.get(e.pointerId);if(!entry)return;touch.buttons.delete(e.pointerId);entry.button.classList.remove('pressed');if(entry.action==='sprint')t.sprint=false;if(entry.action==='shoot'){const p=playerPool[entry.id];t.shotId=null;if(e.type==='pointercancel'||e.type==='lostpointercapture')t.blockRequest=null;if(e.type==='pointerup'&&state==='playing')releaseShot(p);else{p.charge=null;p.chargeProfile=null;}}};
   for(const type of ['pointerup','pointercancel','lostpointercapture'])button.addEventListener(type,end);
   button.addEventListener('contextmenu',e=>e.preventDefault());
 });
