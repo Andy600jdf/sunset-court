@@ -152,6 +152,15 @@ body.practice .scoreboard>#score1,body.practice .scoreboard>.away{display:none}b
  .dual-touch .touch-actions button,.dual-touch .touch-actions .touch-shot{height:64px;min-height:64px}
  .dual-touch #touch-p1-name,.dual-touch #touch-p2-name{bottom:192px}.dual-touch .player-status{bottom:224px!important}
 }
+
+#sga-timing{position:absolute;left:50%;top:110px;transform:translateX(-50%);width:min(540px,78vw);padding:14px 18px;background:#0b202bf2;border:1px solid #83ebff;border-radius:14px;box-shadow:0 0 35px #43cbff33;text-align:center;z-index:9}
+#sga-timing b{font-size:18px;color:#c6f5ff}#sga-timing p{font-size:12px;margin:7px 0;color:#daeaf0}
+#sga-track{position:relative;display:flex;height:36px;margin:14px 0 10px;border-radius:6px;overflow:visible;background:#122e3c}
+#sga-track .segment{height:100%;display:grid;place-items:center;color:#092433;font-size:17px;font-weight:900;border-right:2px solid #102e40;box-sizing:border-box}
+#sga-track .s2{background:#79cbec}#sga-track .s4{background:#8fefaf}#sga-track .s6{background:#ffdc76}
+#sga-pointer{position:absolute;left:0;top:-7px;bottom:-7px;width:4px;background:white;box-shadow:0 0 10px white;transform:translateX(-2px);pointer-events:none}
+#sga-timing .legend{font-size:11px;color:#c1d9e2}#sga-timing .legend strong{color:#ffe594}
+@media(max-height:600px){#sga-timing{top:82px;padding:8px 14px}#sga-track{height:28px;margin:9px 0}#sga-timing b{font-size:15px}}
 </style>
 </head>
 <body>
@@ -179,19 +188,19 @@ body.practice .scoreboard>#score1,body.practice .scoreboard>.away{display:none}b
       <div class="random-picks"><button id="random-one">⚄ 随机当前角色</button><button id="random-all">⚄ 随机全部阵容</button></div><div id="team-slots" class="team-slots hidden"></div><div class="roster-nav"><span>18 位球星 · 游戏综合评级 · 自选 / 随机</span><span><button id="roster-prev" aria-label="上一组球星">‹</button> <button id="roster-next" aria-label="下一组球星">›</button></span></div><div id="roster-grid" class="roster-grid" aria-label="十八位球星"></div><div id="roster-detail" class="roster-detail"></div>
       <div class="roster-rule" id="roster-rule"></div><p id="roster-match" class="roster-match"></p>
     </section>
-    <div class="bottom-note"><span>OFFLINE / V10.2 · TOUCH UPDATE</span><span>键盘 / 触控 · 耳机体验更佳</span><span>EST. 2026</span></div>
+    <div class="bottom-note"><span>OFFLINE / V10.3 · PHANTOM SIX</span><span>键盘 / 触控 · 耳机体验更佳</span><span>EST. 2026</span></div>
   </main>
 
   <section id="hud" class="hidden" aria-label="比赛信息">
     <div class="scoreboard"><div class="team home"><span class="tiny">PLAYER 01</span><b><span id="home-name">库里</span> <i>HOME</i></b></div><strong id="score0">00</strong><div class="score-middle"><span id="game-mode-label">1 ON 1</span><b id="clock">24.0</b><small id="target">FIRST TO 21</small></div><strong id="score1">00</strong><div class="team away"><span class="tiny" id="opponent-type">CPU</span><b><span id="opponent-name">夜航</span> <i>AWAY</i></b></div></div>
     <div class="match-side"><div id="possession">日焰球权</div><div id="clear-note">外线发球</div><div id="shot-context"></div><div id="team-legend" class="hidden"><span class="you">金圈：你</span> · <span class="mate">蓝衣：我方</span> · <span class="enemy">红衣：对手</span></div><div id="practice-stats" class="hidden"></div><button id="practice-recall" class="hidden">取回篮球 <kbd>R</kbd></button><button id="pause-button">暂停 <kbd>ESC</kbd></button></div>
     <div id="toast" role="status"><span id="toast-top"></span><b id="toast-main"></b><small id="toast-sub"></small></div>
-    <aside id="ft-panel" class="hidden" role="status"><b id="ft-title"></b><div class="ft-results" id="ft-results"></div><p id="ft-instruction"></p></aside><div id="feedback"><b id="release-label"></b><span id="release-detail"></span></div>
+    <aside id="sga-timing" class="hidden" role="status"><b>无影手 · 六连罚</b><p id="sga-hint">按住投篮，松手锁定命中数</p><div id="sga-track"><i id="sga-pointer"></i></div><div class="legend">蓝色 2 球 · 绿色 4 球 · <strong>金色 6 球</strong> · 每次区间随机</div></aside><aside id="ft-panel" class="hidden" role="status"><b id="ft-title"></b><div class="ft-results" id="ft-results"></div><p id="ft-instruction"></p></aside><div id="feedback"><b id="release-label"></b><span id="release-detail"></span></div>
     <div id="shotmeter" class="hidden" role="status" aria-label="投篮时机">
       <div class="meter-top"><span id="meter-kind">中距离跳投</span><small id="meter-rhythm">稳定节奏</small></div>
       <svg class="meter-arc" viewBox="0 0 112 222" aria-hidden="true"><defs><linearGradient id="meter-gold" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#bd8040"/><stop offset="1" stop-color="#ffe5a7"/></linearGradient></defs>
         <path class="arc-outline" d="M28 198 Q100 110 40 20"/><path class="arc-track" d="M28 198 Q100 110 40 20"/>
-        <path id="meter-fill" d="M28 198"/><path id="meter-zone" d="M50 65 L45 40"/>
+        <g id="sga-arc-zones"></g><path id="meter-fill" d="M28 198"/><path id="meter-zone" d="M50 65 L45 40"/>
         <line id="meter-tick" x1="18" y1="198" x2="38" y2="198"/><circle id="meter-dot" cx="28" cy="198" r="3"/>
       </svg>
       <div class="meter-instruction"><b id="meter-readout">蓄力</b><span id="meter-time">0.68s</span><small id="contest">空位出手</small></div>
@@ -213,7 +222,7 @@ window.CourtRoster={
  curry:{id:'curry',name:'库里',english:'CURRY',number:'30',role:'外线神射',color:'#f7c65c',team:'#194ca1',skin:0xbc8962,width:.94,height:.96,finish:60,mid:85,three:100,defense:57,speed:1.13,contest:1.45,dunkRange:0.8,dunkStamina:0.52,skill:'烈焰超远三分',range:'三分线外',description:'无视干扰与封盖，投出燃烧的三分球。',trait:'接球后 2.6 秒内三分绿区加宽 25%，出手更快；超远距离衰减最小。篮下、力量和贴防投射弱。'},
  lebron:{id:'lebron',name:'詹姆斯',english:'JAMES',number:'23',role:'强力终结',color:'#f3ae69',team:'#602781',skin:0x784627,width:1.14,height:1.04,finish:99,mid:83,three:69,defense:91,speed:1.06,contest:0.72,dunkRange:2.6,dunkStamina:0.12,skill:'全场霸王步',range:'全场任何持球位置',description:'抱球连续走步强推，把挡路的防守人顶开，一路冲进篮下暴扣；技能可直接强行进攻。',trait:'冲刺突破时更容易顶开防守，篮下抗干扰大幅提升；三分明显偏弱。'},
  durant:{id:'durant',name:'杜兰特',english:'DURANT',number:'35',role:'中距离大师',color:'#aab7ff',team:'#242e43',skin:0x74472f,width:.90,height:1.12,finish:85,mid:100,three:91,defense:78,speed:0.96,contest:0.88,dunkRange:1.8,dunkStamina:0.25,skill:'死神收割',range:'距篮筐 2.65–5.5 米',description:'紫色残影假晃，长跨步横移后撤，腾空后仰投出死神高弧线中投，无视干扰与封盖。',trait:'中投出手快、抗干扰强，高出手点结合长臂；力量和篮下终结逊于内线。'},
- sga:{id:'sga',name:'亚历山大',english:'GILGEOUS-ALEXANDER',number:'2',role:'节奏造犯规',color:'#77d6eb',team:'#1785c1',skin:0x855638,width:.96,height:1.05,finish:90,mid:95,three:73,defense:80,speed:1.04,contest:0.88,dunkRange:1.55,dunkStamina:0.28,skill:'造犯规 · 四次罚球',range:'三分线内',description:'倒地制造犯规，获得四次各值 1 分的罚球。每球绿区变化、指针变速，必须自己投。',trait:'变向后 2.6 秒内中投绿区加宽 24%，突破后急停更稳定；远投偏弱。'},
+ sga:{id:'sga',name:'亚历山大',english:'GILGEOUS-ALEXANDER',number:'2',role:'节奏造犯规',color:'#77d6eb',team:'#1785c1',skin:0x855638,width:.96,height:1.05,finish:90,mid:95,three:73,defense:80,speed:1.04,contest:0.88,dunkRange:1.55,dunkStamina:0.28,skill:'无影手 · 六连罚',range:'三分线内',description:'倒地造犯规后，只需一次时机选择：随机碎片区间决定命中 2、4 或 6 球，随后无影手极速连罚六球，每球 1 分。',trait:'变向后 2.6 秒内中投绿区加宽 24%，突破后急停更稳定；远投偏弱。'},
  iverson:{id:'iverson',name:'艾弗森',english:'IVERSON',number:'3',role:'极速变向',color:'#ff9398',team:'#ae2439',skin:0x8c593b,width:.86,height:.90,finish:85,mid:89,three:76,defense:69,speed:1.28,contest:1.3,dunkRange:0.78,dunkStamina:0.56,skill:'脚踝终结者',range:'篮筐前方 1.4–5.8 米',description:'左右大幅度交叉运球，横移幅度加倍，再切入快速出手。',trait:'超快启动、宽幅变向和短变向冷却，抢断积极；对抗、护筐和篮板弱。'},
  shaq:{id:'shaq',name:'奥尼尔',english:"O'NEAL",number:'34',role:'禁区统治',color:'#ffd86c',team:'#e4ae1f',skin:0x65432e,width:1.32,height:1.15,finish:100,mid:54,three:30,defense:94,speed:0.73,contest:0.57,dunkRange:2.85,dunkStamina:0.1,skill:'螺旋暴扣',range:'篮筐前方 6 米内',description:'腾空旋转两整圈，沿螺旋路线飞向篮筐，双手暴扣；成功普通扣篮也能充能。',trait:'力量、卡位、篮板与远一步扣篮突出，篮下抗干扰极强；移动慢，中远投绿区很窄。'},
  kobe:{id:'kobe',name:'科比',english:'BRYANT',number:'24',role:'后仰得分手',color:'#d5a8ff',team:'#552884',skin:0x986b46,width:.99,height:1.03,finish:90,mid:98,three:84,defense:88,speed:1.02,contest:0.82,dunkRange:1.85,dunkStamina:0.22,skill:'曼巴后仰',range:'三分线内、距篮筐 2.65–5.7 米',description:'向后撤出空间，跳起后仰中投，无视干扰与封盖。',trait:'中投抗干扰突出，严密防守下中投绿区额外加宽 12%；远投没有神射手待遇。'},
@@ -230,7 +239,7 @@ window.CourtRoster={
  zhu:{id:'zhu',name:'朱东裕',english:'ZHU',number:'21',role:'篮板大神',color:'#82f5de',team:'#16615d',skin:0xd5a779,width:1.22,height:1.14,finish:96,mid:75,three:52,defense:93,speed:.88,contest:.76,dunkRange:2.45,dunkStamina:.15,skill:'引力反弹·天穹补扣',range:'清球后，篮筐前方 5.5 米内',description:'把球砸向篮板制造反弹，张开引力场吸回篮球，腾空摘球双手补扣，得 2 分。',trait:'自动吸取身边 4.2 米内已经投失的篮板球，带引力回收动画；触发后冷却 4 秒，不能吸走传球、进球或对手持球。'},
  ma:{id:'ma',name:'马立凡',english:'MA',number:'03',role:'星际突破手',color:'#d6a1ff',team:'#3d2467',skin:0xd8ae85,width:1.02,height:1.06,finish:98,mid:82,three:70,defense:74,speed:1.14,contest:.90,dunkRange:1.65,dunkStamina:.25,skill:'宇宙三步·踏星上篮',range:'清球后的任意持球位置',description:'星空与行星展开，踩着三座星环连续跨出三次超大步，从宇宙跃回篮下单手挑篮，得 2 分。',trait:'突破、速度和篮下手感突出；大招全场三次巨步上篮，三分与护筐一般。'}
 };
-const arcadeProfiles={"curry":{"tier":"SS","energyCost":4,"strength":30,"handle":91,"passing":86,"steal":55,"rebound":35,"blockReach":0.36,"vertical":3.9,"releaseTime":0.84,"speedRating":85,"perk":"无球核弹","perkText":"接球后 2.6 秒内三分绿区加宽 25%，出手更快；超远距离衰减最小。篮下、力量和贴防投射弱。 成功普通扣篮也充能。","dunkCharge":true,"crossScale":1,"moveCooldown":0.6,"paintResist":1.22,"midResist":1,"contestRadius":2.05,"deepPenalty":0.045,"catchThree":0.25,"skillPoints":3,"chargeReason":"必中三分"},"lebron":{"tier":"SS","energyCost":3,"strength":96,"handle":81,"passing":89,"steal":82,"rebound":87,"blockReach":0.66,"vertical":4.8,"releaseTime":0.95,"speedRating":76,"perk":"重装突破","perkText":"冲刺突破时更容易顶开防守，篮下抗干扰大幅提升；三分明显偏弱。 成功普通扣篮也充能。","dunkCharge":true,"crossScale":1,"moveCooldown":0.6,"paintResist":0.5,"midResist":1,"contestRadius":2.05,"deepPenalty":0.24,"skillPoints":2,"chargeReason":"强力两分 + 位移 / 控制"},"durant":{"tier":"S+","energyCost":2,"strength":50,"handle":78,"passing":62,"steal":65,"rebound":70,"blockReach":0.63,"vertical":4.6,"releaseTime":0.88,"speedRating":64,"perk":"长臂死神","perkText":"中投出手快、抗干扰强，高出手点结合长臂；力量和篮下终结逊于内线。 成功普通扣篮也充能。","dunkCharge":true,"crossScale":1,"moveCooldown":0.6,"paintResist":1,"midResist":0.52,"contestRadius":2.05,"deepPenalty":0.11,"skillPoints":2,"chargeReason":"普通两分终结"},"sga":{"tier":"A+","energyCost":4,"strength":65,"handle":89,"passing":75,"steal":84,"rebound":48,"blockReach":0.5,"vertical":4.4,"releaseTime":0.94,"speedRating":74,"perk":"节奏猎手","perkText":"变向后 2.6 秒内中投绿区加宽 24%，突破后急停更稳定；远投偏弱。 成功普通扣篮也充能。","dunkCharge":true,"crossScale":1,"moveCooldown":0.6,"paintResist":1,"midResist":0.82,"contestRadius":2.05,"deepPenalty":0.23,"rhythmMid":0.24,"skillPoints":4,"chargeReason":"最多四分，手动罚球"},"iverson":{"tier":"A+","energyCost":2,"strength":24,"handle":99,"passing":76,"steal":89,"rebound":25,"blockReach":0.33,"vertical":4.1,"releaseTime":0.85,"speedRating":97,"perk":"极速穿针","perkText":"超快启动、宽幅变向和短变向冷却，抢断积极；对抗、护筐和篮板弱。 成功普通扣篮也充能。","dunkCharge":true,"crossScale":1.48,"moveCooldown":0.36,"paintResist":1,"midResist":1,"contestRadius":2.05,"deepPenalty":0.22,"skillPoints":2,"chargeReason":"普通两分终结"},"shaq":{"tier":"SS","energyCost":3,"strength":100,"handle":24,"passing":40,"steal":38,"rebound":99,"blockReach":0.78,"vertical":4.5,"releaseTime":1.1,"speedRating":30,"perk":"禁区重锤","perkText":"力量、卡位、篮板与远一步扣篮突出，篮下抗干扰极强；移动慢，中远投弱于篮下，但仍有基础绿区。 成功普通扣篮也充能。","dunkCharge":true,"crossScale":0.63,"moveCooldown":0.92,"paintResist":0.38,"midResist":1,"contestRadius":2.05,"deepPenalty":0.42,"skillPoints":2,"chargeReason":"强力两分 + 位移 / 控制"},"kobe":{"tier":"S+","energyCost":2,"strength":72,"handle":90,"passing":62,"steal":85,"rebound":57,"blockReach":0.52,"vertical":4.6,"releaseTime":0.91,"speedRating":72,"perk":"高难度终结","perkText":"中投抗干扰突出，严密防守下中投绿区额外加宽 12%；远投没有神射手待遇。 成功普通扣篮也充能。","dunkCharge":true,"crossScale":1,"moveCooldown":0.6,"paintResist":1,"midResist":0.56,"contestRadius":2.05,"deepPenalty":0.19,"toughMid":0.12,"skillPoints":2,"chargeReason":"普通两分终结"},"wemby":{"tier":"SS","energyCost":3,"strength":48,"handle":52,"passing":50,"steal":66,"rebound":98,"blockReach":0.91,"vertical":5.0,"releaseTime":1.04,"speedRating":57,"perk":"禁飞长城","perkText":"封盖触及范围、起跳高度、干扰范围和空中篮板突出；力量较弱，横移偏慢。 成功普通扣篮也充能。","dunkCharge":true,"crossScale":1,"moveCooldown":0.6,"paintResist":1,"midResist":1,"contestRadius":2.7,"deepPenalty":0.24,"skillPoints":2,"chargeReason":"强力两分 + 位移 / 控制"},"doncic":{"tier":"S","energyCost":5,"strength":88,"handle":91,"passing":96,"steal":52,"rebound":79,"blockReach":0.38,"vertical":3.6,"releaseTime":1.06,"speedRating":42,"perk":"节奏指挥官","perkText":"近身变向让防守短暂减速；妙传让队友接球后 2.6 秒绿区加宽 10%。启动、防守偏慢。 成功普通扣篮也充能。","dunkCharge":true,"crossScale":1,"moveCooldown":0.6,"paintResist":1,"midResist":1,"contestRadius":2.05,"deepPenalty":0.1,"slowOnCross":0.9,"assistBoost":0.1,"skillPoints":3,"chargeReason":"必中三分 + 减速"},"george":{"tier":"S","energyCost":3,"strength":70,"handle":83,"passing":70,"steal":97,"rebound":70,"blockReach":0.64,"vertical":4.7,"releaseTime":0.92,"speedRating":82,"perk":"外线锁防","perkText":"长距离抢断和大范围贴防，外线追防速度快，攻防兼顾；单项终结弱于顶级专精角色。 成功普通扣篮也充能。","dunkCharge":true,"crossScale":1,"moveCooldown":0.6,"paintResist":1,"midResist":1,"contestRadius":2.4,"deepPenalty":0.16,"stealReach":1.34,"skillPoints":2,"chargeReason":"强力两分 + 位移 / 控制"},"hakeem":{"tier":"S+","energyCost":2,"strength":94,"handle":69,"passing":53,"steal":81,"rebound":95,"blockReach":0.78,"vertical":4.7,"releaseTime":1.03,"speedRating":59,"perk":"低位大师","perkText":"变向后 2.6 秒内篮下绿区加宽 22%、更抗干扰，力量卡位和护筐强；三分偏弱。 成功普通扣篮也充能。","dunkCharge":true,"crossScale":1,"moveCooldown":0.6,"paintResist":0.66,"midResist":1,"contestRadius":2.05,"deepPenalty":0.36,"rhythmPaint":0.22,"skillPoints":2,"chargeReason":"普通两分终结"},"yang":{"tier":"B","energyCost":2,"strength":87,"handle":49,"passing":93,"steal":55,"rebound":85,"blockReach":0.65,"vertical":4.1,"releaseTime":1.02,"speedRating":34,"perk":"东方策应轴","perkText":"妙传让队友接球后 2.6 秒绿区加宽 16%，内线力量、篮板稳定；脚步慢、三分偏弱。 成功普通扣篮也充能。","dunkCharge":true,"crossScale":1,"moveCooldown":0.6,"paintResist":0.8,"midResist":1,"contestRadius":2.05,"deepPenalty":0.34,"assistBoost":0.16,"skillPoints":2,"chargeReason":"普通两分终结"},"kyrie":{"tier":"S+","energyCost":2,"strength":34,"handle":100,"passing":81,"steal":70,"rebound":29,"blockReach":0.35,"vertical":4.2,"releaseTime":0.84,"speedRating":91,"perk":"蝴蝶终结","perkText":"运球难抢断、变向冷却短，上篮抗干扰明显增强；力量、护筐和篮板弱。 成功普通扣篮也充能。","dunkCharge":true,"crossScale":1.3,"moveCooldown":0.4,"paintResist":0.43,"midResist":1,"contestRadius":2.05,"deepPenalty":0.17,"skillPoints":2,"chargeReason":"普通两分终结"},"jokic":{"tier":"SS","energyCost":2,"strength":96,"handle":72,"passing":99,"steal":62,"rebound":97,"blockReach":0.54,"vertical":3.6,"releaseTime":1.1,"speedRating":26,"perk":"全场大脑","perkText":"传球速度和保护突出，妙传让队友接球后 2.6 秒绿区加宽 22%，力量和篮板强；跑动慢。 成功普通扣篮也充能。","dunkCharge":true,"crossScale":1,"moveCooldown":0.6,"paintResist":0.65,"midResist":1,"contestRadius":2.05,"deepPenalty":0.24,"assistBoost":0.22,"skillPoints":2,"chargeReason":"普通两分终结"},"zhou":{"tier":"SSS","energyCost":3,"strength":100,"handle":100,"passing":100,"steal":100,"rebound":100,"blockReach":1.02,"vertical":5.3,"releaseTime":0.8,"speedRating":100,"perk":"最强王者","perkText":"全属性满档，传球给队友加宽绿区 26%；保留五彩运球、大帽扇飞和星陨大招。 成功普通扣篮也充能。","dunkCharge":true,"crossScale":1.52,"moveCooldown":0.32,"paintResist":0.3,"midResist":0.4,"contestRadius":2.85,"deepPenalty":0,"assistBoost":0.26,"catchThree":0.28,"rhythmMid":0.26,"rhythmPaint":0.26,"stealReach":1.4,"skillPoints":2,"chargeReason":"强力两分 + 位移 / 控制"},"zhang":{"tier":"A","energyCost":3,"strength":62,"handle":78,"passing":72,"steal":65,"rebound":50,"blockReach":0.47,"vertical":4.2,"releaseTime":0.94,"speedRating":76,"perk":"毒雾突袭","perkText":"各项基础属性提升，上篮更稳、控球和移动正常；大招熏晕附近对手后突破上篮。成功普通扣篮也充能。","dunkCharge":true,"crossScale":1.12,"moveCooldown":0.52,"paintResist":0.72,"midResist":0.9,"contestRadius":2.05,"deepPenalty":0.22,"skillPoints":2,"chargeReason":"两分上篮 + 范围眩晕"},"zhu":{"tier":"S+","energyCost":3,"skillPoints":2,"chargeReason":"两分补扣 + 吸板被动","strength":96,"handle":60,"passing":78,"steal":62,"rebound":100,"blockReach":0.75,"vertical":4.7,"releaseTime":1.02,"speedRating":55,"perk":"篮板引力场","perkText":"4.2 米内真正投失的篮板会被自动吸回，4 秒冷却；不吸进球、传球、技能飞行球或已持有的球。成功普通扣篮也充能。","dunkCharge":true,"crossScale":0.86,"moveCooldown":0.72,"paintResist":0.58,"midResist":1,"contestRadius":2.22,"deepPenalty":0.24},"ma":{"tier":"S+","energyCost":3,"skillPoints":2,"chargeReason":"全场三步上篮，两分","strength":68,"handle":92,"passing":74,"steal":67,"rebound":63,"blockReach":0.49,"vertical":4.4,"releaseTime":0.94,"speedRating":86,"perk":"踏星突破","perkText":"速度、变向与上篮强，近筐抗干扰突出；普通扣篮也充能，大招三步跨越全场挑篮。","dunkCharge":true,"crossScale":1.18,"moveCooldown":0.46,"paintResist":0.56,"midResist":1,"contestRadius":2.05,"deepPenalty":0.18}};
+const arcadeProfiles={"curry":{"tier":"SS","energyCost":4,"strength":30,"handle":91,"passing":86,"steal":55,"rebound":35,"blockReach":0.36,"vertical":3.9,"releaseTime":0.84,"speedRating":85,"perk":"无球核弹","perkText":"接球后 2.6 秒内三分绿区加宽 25%，出手更快；超远距离衰减最小。篮下、力量和贴防投射弱。 成功普通扣篮也充能。","dunkCharge":true,"crossScale":1,"moveCooldown":0.6,"paintResist":1.22,"midResist":1,"contestRadius":2.05,"deepPenalty":0.045,"catchThree":0.25,"skillPoints":3,"chargeReason":"必中三分"},"lebron":{"tier":"SS","energyCost":3,"strength":96,"handle":81,"passing":89,"steal":82,"rebound":87,"blockReach":0.66,"vertical":4.8,"releaseTime":0.95,"speedRating":76,"perk":"重装突破","perkText":"冲刺突破时更容易顶开防守，篮下抗干扰大幅提升；三分明显偏弱。 成功普通扣篮也充能。","dunkCharge":true,"crossScale":1,"moveCooldown":0.6,"paintResist":0.5,"midResist":1,"contestRadius":2.05,"deepPenalty":0.24,"skillPoints":2,"chargeReason":"强力两分 + 位移 / 控制"},"durant":{"tier":"S+","energyCost":2,"strength":50,"handle":78,"passing":62,"steal":65,"rebound":70,"blockReach":0.63,"vertical":4.6,"releaseTime":0.88,"speedRating":64,"perk":"长臂死神","perkText":"中投出手快、抗干扰强，高出手点结合长臂；力量和篮下终结逊于内线。 成功普通扣篮也充能。","dunkCharge":true,"crossScale":1,"moveCooldown":0.6,"paintResist":1,"midResist":0.52,"contestRadius":2.05,"deepPenalty":0.11,"skillPoints":2,"chargeReason":"普通两分终结"},"sga":{"tier":"A+","energyCost":4,"strength":65,"handle":89,"passing":75,"steal":84,"rebound":48,"blockReach":0.5,"vertical":4.4,"releaseTime":0.94,"speedRating":74,"perk":"节奏猎手","perkText":"变向后 2.6 秒内中投绿区加宽 24%，突破后急停更稳定；远投偏弱。 成功普通扣篮也充能。","dunkCharge":true,"crossScale":1,"moveCooldown":0.6,"paintResist":1,"midResist":0.82,"contestRadius":2.05,"deepPenalty":0.23,"rhythmMid":0.24,"skillPoints":6,"chargeReason":"随机分段判定 · 最多6分"},"iverson":{"tier":"A+","energyCost":2,"strength":24,"handle":99,"passing":76,"steal":89,"rebound":25,"blockReach":0.33,"vertical":4.1,"releaseTime":0.85,"speedRating":97,"perk":"极速穿针","perkText":"超快启动、宽幅变向和短变向冷却，抢断积极；对抗、护筐和篮板弱。 成功普通扣篮也充能。","dunkCharge":true,"crossScale":1.48,"moveCooldown":0.36,"paintResist":1,"midResist":1,"contestRadius":2.05,"deepPenalty":0.22,"skillPoints":2,"chargeReason":"普通两分终结"},"shaq":{"tier":"SS","energyCost":3,"strength":100,"handle":24,"passing":40,"steal":38,"rebound":99,"blockReach":0.78,"vertical":4.5,"releaseTime":1.1,"speedRating":30,"perk":"禁区重锤","perkText":"力量、卡位、篮板与远一步扣篮突出，篮下抗干扰极强；移动慢，中远投弱于篮下，但仍有基础绿区。 成功普通扣篮也充能。","dunkCharge":true,"crossScale":0.63,"moveCooldown":0.92,"paintResist":0.38,"midResist":1,"contestRadius":2.05,"deepPenalty":0.42,"skillPoints":2,"chargeReason":"强力两分 + 位移 / 控制"},"kobe":{"tier":"S+","energyCost":2,"strength":72,"handle":90,"passing":62,"steal":85,"rebound":57,"blockReach":0.52,"vertical":4.6,"releaseTime":0.91,"speedRating":72,"perk":"高难度终结","perkText":"中投抗干扰突出，严密防守下中投绿区额外加宽 12%；远投没有神射手待遇。 成功普通扣篮也充能。","dunkCharge":true,"crossScale":1,"moveCooldown":0.6,"paintResist":1,"midResist":0.56,"contestRadius":2.05,"deepPenalty":0.19,"toughMid":0.12,"skillPoints":2,"chargeReason":"普通两分终结"},"wemby":{"tier":"SS","energyCost":3,"strength":48,"handle":52,"passing":50,"steal":66,"rebound":98,"blockReach":0.91,"vertical":5.0,"releaseTime":1.04,"speedRating":57,"perk":"禁飞长城","perkText":"封盖触及范围、起跳高度、干扰范围和空中篮板突出；力量较弱，横移偏慢。 成功普通扣篮也充能。","dunkCharge":true,"crossScale":1,"moveCooldown":0.6,"paintResist":1,"midResist":1,"contestRadius":2.7,"deepPenalty":0.24,"skillPoints":2,"chargeReason":"强力两分 + 位移 / 控制"},"doncic":{"tier":"S","energyCost":5,"strength":88,"handle":91,"passing":96,"steal":52,"rebound":79,"blockReach":0.38,"vertical":3.6,"releaseTime":1.06,"speedRating":42,"perk":"节奏指挥官","perkText":"近身变向让防守短暂减速；妙传让队友接球后 2.6 秒绿区加宽 10%。启动、防守偏慢。 成功普通扣篮也充能。","dunkCharge":true,"crossScale":1,"moveCooldown":0.6,"paintResist":1,"midResist":1,"contestRadius":2.05,"deepPenalty":0.1,"slowOnCross":0.9,"assistBoost":0.1,"skillPoints":3,"chargeReason":"必中三分 + 减速"},"george":{"tier":"S","energyCost":3,"strength":70,"handle":83,"passing":70,"steal":97,"rebound":70,"blockReach":0.64,"vertical":4.7,"releaseTime":0.92,"speedRating":82,"perk":"外线锁防","perkText":"长距离抢断和大范围贴防，外线追防速度快，攻防兼顾；单项终结弱于顶级专精角色。 成功普通扣篮也充能。","dunkCharge":true,"crossScale":1,"moveCooldown":0.6,"paintResist":1,"midResist":1,"contestRadius":2.4,"deepPenalty":0.16,"stealReach":1.34,"skillPoints":2,"chargeReason":"强力两分 + 位移 / 控制"},"hakeem":{"tier":"S+","energyCost":2,"strength":94,"handle":69,"passing":53,"steal":81,"rebound":95,"blockReach":0.78,"vertical":4.7,"releaseTime":1.03,"speedRating":59,"perk":"低位大师","perkText":"变向后 2.6 秒内篮下绿区加宽 22%、更抗干扰，力量卡位和护筐强；三分偏弱。 成功普通扣篮也充能。","dunkCharge":true,"crossScale":1,"moveCooldown":0.6,"paintResist":0.66,"midResist":1,"contestRadius":2.05,"deepPenalty":0.36,"rhythmPaint":0.22,"skillPoints":2,"chargeReason":"普通两分终结"},"yang":{"tier":"B","energyCost":2,"strength":87,"handle":49,"passing":93,"steal":55,"rebound":85,"blockReach":0.65,"vertical":4.1,"releaseTime":1.02,"speedRating":34,"perk":"东方策应轴","perkText":"妙传让队友接球后 2.6 秒绿区加宽 16%，内线力量、篮板稳定；脚步慢、三分偏弱。 成功普通扣篮也充能。","dunkCharge":true,"crossScale":1,"moveCooldown":0.6,"paintResist":0.8,"midResist":1,"contestRadius":2.05,"deepPenalty":0.34,"assistBoost":0.16,"skillPoints":2,"chargeReason":"普通两分终结"},"kyrie":{"tier":"S+","energyCost":2,"strength":34,"handle":100,"passing":81,"steal":70,"rebound":29,"blockReach":0.35,"vertical":4.2,"releaseTime":0.84,"speedRating":91,"perk":"蝴蝶终结","perkText":"运球难抢断、变向冷却短，上篮抗干扰明显增强；力量、护筐和篮板弱。 成功普通扣篮也充能。","dunkCharge":true,"crossScale":1.3,"moveCooldown":0.4,"paintResist":0.43,"midResist":1,"contestRadius":2.05,"deepPenalty":0.17,"skillPoints":2,"chargeReason":"普通两分终结"},"jokic":{"tier":"SS","energyCost":2,"strength":96,"handle":72,"passing":99,"steal":62,"rebound":97,"blockReach":0.54,"vertical":3.6,"releaseTime":1.1,"speedRating":26,"perk":"全场大脑","perkText":"传球速度和保护突出，妙传让队友接球后 2.6 秒绿区加宽 22%，力量和篮板强；跑动慢。 成功普通扣篮也充能。","dunkCharge":true,"crossScale":1,"moveCooldown":0.6,"paintResist":0.65,"midResist":1,"contestRadius":2.05,"deepPenalty":0.24,"assistBoost":0.22,"skillPoints":2,"chargeReason":"普通两分终结"},"zhou":{"tier":"SSS","energyCost":3,"strength":100,"handle":100,"passing":100,"steal":100,"rebound":100,"blockReach":1.02,"vertical":5.3,"releaseTime":0.8,"speedRating":100,"perk":"最强王者","perkText":"全属性满档，传球给队友加宽绿区 26%；保留五彩运球、大帽扇飞和星陨大招。 成功普通扣篮也充能。","dunkCharge":true,"crossScale":1.52,"moveCooldown":0.32,"paintResist":0.3,"midResist":0.4,"contestRadius":2.85,"deepPenalty":0,"assistBoost":0.26,"catchThree":0.28,"rhythmMid":0.26,"rhythmPaint":0.26,"stealReach":1.4,"skillPoints":2,"chargeReason":"强力两分 + 位移 / 控制"},"zhang":{"tier":"A","energyCost":3,"strength":62,"handle":78,"passing":72,"steal":65,"rebound":50,"blockReach":0.47,"vertical":4.2,"releaseTime":0.94,"speedRating":76,"perk":"毒雾突袭","perkText":"各项基础属性提升，上篮更稳、控球和移动正常；大招熏晕附近对手后突破上篮。成功普通扣篮也充能。","dunkCharge":true,"crossScale":1.12,"moveCooldown":0.52,"paintResist":0.72,"midResist":0.9,"contestRadius":2.05,"deepPenalty":0.22,"skillPoints":2,"chargeReason":"两分上篮 + 范围眩晕"},"zhu":{"tier":"S+","energyCost":3,"skillPoints":2,"chargeReason":"两分补扣 + 吸板被动","strength":96,"handle":60,"passing":78,"steal":62,"rebound":100,"blockReach":0.75,"vertical":4.7,"releaseTime":1.02,"speedRating":55,"perk":"篮板引力场","perkText":"4.2 米内真正投失的篮板会被自动吸回，4 秒冷却；不吸进球、传球、技能飞行球或已持有的球。成功普通扣篮也充能。","dunkCharge":true,"crossScale":0.86,"moveCooldown":0.72,"paintResist":0.58,"midResist":1,"contestRadius":2.22,"deepPenalty":0.24},"ma":{"tier":"S+","energyCost":3,"skillPoints":2,"chargeReason":"全场三步上篮，两分","strength":68,"handle":92,"passing":74,"steal":67,"rebound":63,"blockReach":0.49,"vertical":4.4,"releaseTime":0.94,"speedRating":86,"perk":"踏星突破","perkText":"速度、变向与上篮强，近筐抗干扰突出；普通扣篮也充能，大招三步跨越全场挑篮。","dunkCharge":true,"crossScale":1.18,"moveCooldown":0.46,"paintResist":0.56,"midResist":1,"contestRadius":2.05,"deepPenalty":0.18}};
 for(const [id,profile] of Object.entries(arcadeProfiles))Object.assign(window.CourtRoster[id],profile);
 </script>
   <script>
@@ -259,7 +268,7 @@ function cloth(color){const r=rand(438);const tex=texture(256,256,(c,w,h)=>{c.fi
 function bodyPart(parent,mat,profile,sx=1,sz=1){const m=mesh(new T.LatheGeometry(profile.map(([r,y])=>new T.Vector2(r,y)),32),mat,parent);m.scale.set(sx,1,sz);return m;}
 function batchStatic(root,recursive=true){
   root.updateWorldMatrix(true,true);const inv=root.matrixWorld.clone().invert(),groups=new Map();
-  const collect=m=>{if((m.parent?.userData?.courtRoof||m.parent?.userData?.courtEndWall)||!m.isMesh||m.isInstancedMesh||!m.visible||Array.isArray(m.material)||m.material.transparent)return;const k=m.material.uuid+'_'+m.castShadow+'_'+m.receiveShadow;if(!groups.has(k))groups.set(k,[]);groups.get(k).push(m);};
+  const collect=m=>{for(let node=m;node;node=node.parent)if(node.userData.courtVariant)return;if((m.parent?.userData?.courtRoof||m.parent?.userData?.courtEndWall)||!m.isMesh||m.isInstancedMesh||!m.visible||Array.isArray(m.material)||m.material.transparent)return;const k=m.material.uuid+'_'+m.castShadow+'_'+m.receiveShadow;if(!groups.has(k))groups.set(k,[]);groups.get(k).push(m);};
   if(recursive)root.traverse(m=>{if(m!==root)collect(m);});else root.children.forEach(collect);
   for(const list of groups.values()){if(list.length<2)continue;const attrs={position:[],normal:[],uv:[]};for(const m of list){let g=m.geometry.clone();if(g.index)g=g.toNonIndexed();g.applyMatrix4(new T.Matrix4().multiplyMatrices(inv,m.matrixWorld));for(const key of Object.keys(attrs)){const a=g.getAttribute(key);if(a)attrs[key].push(a.array);else attrs[key].push(new Float32Array(g.getAttribute('position').count*(key==='uv'?2:3)));}g.dispose();}
     const geo=new T.BufferGeometry();for(const key of Object.keys(attrs)){const arrays=attrs[key],joined=new Float32Array(arrays.reduce((s,a)=>s+a.length,0));let at=0;arrays.forEach(a=>{joined.set(a,at);at+=a.length;});geo.setAttribute(key,new T.BufferAttribute(joined,key==='uv'?2:3));}const m=new T.Mesh(geo,list[0].material);m.castShadow=list[0].castShadow;m.receiveShadow=list[0].receiveShadow;list.forEach(old=>old.parent.remove(old));root.add(m);
@@ -437,6 +446,7 @@ function pose(a,p,time){
     aimArm(a,1,r,.65*smooth((m.phase-.82)/.18)*(1-recover));aimArm(a,0,left,m.two?.35:0);
   }
   if(p.landing>0&&jump===0&&!charging&&!dunking){const compress=Math.sin((1-p.landing/.20)*PI)*.09;a.rig.position.y-=compress;a.legs.forEach(l=>{l.upper.rotation.x-=compress*3;l.knee.rotation.x+=compress*6;});}
+  if(p.skillPose==='sgaRapid'){const pulse=(Math.sin(p.skillPhase*2*PI/.105)+1)/2;a.arms.forEach((arm,i)=>{arm.shoulder.rotation.x=-1.35-pulse*1.05;arm.shoulder.rotation.z=(i?1:-1)*.16;arm.elbow.rotation.x=-.9+pulse*.75;});a.torso.rotation.y=Math.sin(p.skillPhase*50)*.06;}
   if(p.skillPose==='flop'){
     const q=smooth(p.skillPhase);a.rig.rotation.z=1.43*q;a.rig.position.y=.18*q;
     a.arms.forEach((arm,i)=>{arm.shoulder.rotation.x=-1.6*q;arm.shoulder.rotation.z=(i===0?-1:1)*.65*q;arm.elbow.rotation.x=-.45;});a.legs.forEach(l=>l.knee.rotation.x=.6*q);
@@ -522,19 +532,22 @@ function create(canvas){
       for(let k=0;k<27;k++){const xx=x+r()*cw;c.strokeStyle=`rgba(${r()>.5?'255,230,185':'91,50,20'},${.025+r()*.055})`;c.lineWidth=r()*1.3+.3;c.beginPath();c.moveTo(xx,y);c.bezierCurveTo(xx+5,y+rh*.3,xx-4,y+rh*.7,xx+r()*5,y+rh);c.stroke();}
     }
   });wood.anisotropy=renderer.capabilities.getMaxAnisotropy();
-  const floorMat=material(0xffffff,.46,{map:wood,bumpMap:wood,bumpScale:.006,metalness:.025});const floor=mesh(new T.PlaneGeometry(15,14),floorMat,scene,0,0,0);floor.rotation.x=-PI/2;floor.castShadow=false;
+  const floorMat=material(0xffffff,.46,{map:wood,bumpMap:wood,bumpScale:.006,metalness:.025});const floor=mesh(new T.PlaneGeometry(15,14),floorMat,scene,0,0,0);floor.rotation.x=-PI/2;floor.castShadow=false;floor.userData.courtVariant='floor';
   const dark=material(0x183337,.58),black=material(0x142226,.76),wall=material(0x476362,.87),lineMat=new T.MeshBasicMaterial({color:0xf3e4c6,side:T.DoubleSide}),orange=material(0xcb512c,.64),cream=material(0xe4d6b5,.7),metal=material(0x556e6b,.38,{metalness:.75});
-  box(scene,dark,0,-.11,0,21,.20,19);
+  const courtBase=box(scene,dark,0,-.11,0,21,.20,19);courtBase.userData.courtVariant='base';
   // Painted key, international three-point arc and exact visible boundaries.
   const paint=mesh(new T.PlaneGeometry(4.9,5.8),material(0x244b48,.44),scene,0,.004,-4.1);paint.rotation.x=-PI/2;paint.castShadow=false;
   function line(x1,z1,x2,z2,width=.04){const dx=x2-x1,dz=z2-z1;const m=mesh(new T.PlaneGeometry(width,Math.hypot(dx,dz)),lineMat,scene,(x1+x2)/2,.009,(z1+z2)/2);m.rotation.set(-PI/2,0,Math.atan2(dx,dz));m.castShadow=false;return m;}
   function arc(x,z,r,start,end,width=.042){const pts=[];const steps=Math.ceil(Math.abs(end-start)*45);for(let i=0;i<=steps;i++){const a=start+(end-start)*i/steps;pts.push(new T.Vector2(x+Math.sin(a)*r,z+Math.cos(a)*r));}for(let i=1;i<pts.length;i++)line(pts[i-1].x,pts[i-1].y,pts[i].x,pts[i].y,width);}
-  line(-7.45,-6.95,7.45,-6.95);line(-7.45,6.95,7.45,6.95);line(-7.45,-6.95,-7.45,6.95);line(7.45,-6.95,7.45,6.95);
+  const normalBounds=new T.Group(),wideBounds=new T.Group();normalBounds.userData.courtVariant='normal';wideBounds.userData.courtVariant='wide';scene.add(normalBounds,wideBounds);wideBounds.visible=false;
+  function boundary(group,x,z){for(const m of [line(-x,-6.95,x,-6.95),line(-x,z,x,z),line(-x,-6.95,-x,z),line(x,-6.95,x,z)])group.add(m);const before=new Set(scene.children);arc(0,z+.05,1.8,PI/2,PI*1.5);for(const m of [...scene.children])if(!before.has(m))group.add(m);}
+  boundary(normalBounds,7.45,6.95);boundary(wideBounds,9.35,9.95);
   for(const s of [-1,1]){line(s*2.45,-6.95,s*2.45,-1.2);for(let j=0;j<4;j++)line(s*2.45,-5.55+j*.87,s*2.65,-5.55+j*.87);line(s*6.65,-6.95,s*6.65,-4.5);}
   line(-2.45,-1.2,2.45,-1.2);arc(0,-1.2,1.8,-PI/2,PI/2);for(let j=0;j<12;j++)arc(0,-1.2,1.8,PI/2+j*PI/12,PI/2+(j+.5)*PI/12,.025);
-  arc(0,-5.6,6.75,-1.407,1.407);arc(0,-5.6,1.25,-PI/2,PI/2);arc(0,7,1.8,PI/2,PI*1.5);
+  arc(0,-5.6,6.75,-1.407,1.407);arc(0,-5.6,1.25,-PI/2,PI/2);
   const centerLogo=label(scene,'AFTER HOURS',0,.015,4.35,5.8,1.45,'#244743',null,100);centerLogo.rotation.x=-PI/2;const centerSub=label(scene,'SUNSET ATHLETIC CLUB',0,.015,5.4,3.2,.5,'#4b6656',null,55);centerSub.rotation.x=-PI/2;
   for(const s of [-1,1]){const l=label(scene,'THE COURT IS YOURS',s*8.42,.022,0,7,.75,'#aab9a4',null,72);l.rotation.set(-PI/2,0,s*PI/2);}
+  const beforeScenery=new Set(scene.children);
   const courtEndWall=new T.Group();courtEndWall.userData.courtEndWall=true;scene.add(courtEndWall);
   // Industrial gym, oversized glazing, sunlight and distant skyline.
   box(courtEndWall,black,0,1,-9.3,21,2,.35);box(scene,wall,-10.4,3.3,0,.3,6.6,19);box(scene,wall,10.4,3.3,0,.3,6.6,19);
@@ -558,6 +571,7 @@ function create(canvas){
   label(courtEndWall,'ONE COURT. TWO STORIES.',4.7,1.2,-9.09,4.0,.6,'#a8c1b0',null,65);
   label(courtEndWall,'SUNSET CLUB / 001',4.7,.75,-9.09,3.3,.45,'#718f7f',null,62);
   // Detailed anchored stanchion, foam, transparent backboard and regulation rim.
+  const wideScenery=new T.Group();wideScenery.userData.courtVariant='scenery';for(const node of [...scene.children])if(!beforeScenery.has(node))wideScenery.add(node);scene.add(wideScenery);
   const hoop=new V(0,3.05,-5.6),support=new T.Group();scene.add(support);
   box(support,black,0,.23,-8.1,1.45,.46,1.8);box(support,dark,0,1.25,-8.55,.45,2.45,.43);
   rod(support,metal,[0,1.0,-8.48],[0,3.8,-6.35],.12);rod(support,metal,[-.2,2.4,-8.45],[-.65,3.45,-6.25],.045);rod(support,metal,[.2,2.4,-8.45],[.65,3.45,-6.25],.045);
@@ -580,7 +594,7 @@ function create(canvas){
   const net=new Net(scene,hoop.x,hoop.y-.025,hoop.z);
   const ballTex=texture(1024,512,(c,w,h)=>{const r=rand(74);c.fillStyle='#bf5725';c.fillRect(0,0,w,h);for(let i=0;i<48000;i++){const x=r()*w,y=r()*h;c.fillStyle=r()>.45?'rgba(39,20,7,.25)':'rgba(255,192,100,.27)';c.beginPath();c.arc(x,y,.7+r()*.8,0,2*PI);c.fill();}c.lineWidth=5;c.strokeStyle='#251c13';for(let x=0;x<=w;x+=w/4){c.beginPath();c.moveTo(x,0);c.lineTo(x,h);c.stroke();}c.beginPath();c.moveTo(0,h/2);c.lineTo(w,h/2);c.stroke();for(const off of [0,w/2]){c.beginPath();for(let i=0;i<=128;i++){const y=i*h/128,x=off+w/4*Math.sin(y/h*PI);i?c.lineTo(x,y):c.moveTo(x,y);}c.stroke();}c.textAlign='center';c.fillStyle='#201a12';c.font='bold 27px Arial';c.fillText('AFTER HOURS',w*.375,h*.37);c.font='13px Arial';c.fillText('OFFICIAL GAME BALL',w*.375,h*.42);});
   batchStatic(scene);
-  const fullCourtGroup=new T.Group();fullCourtGroup.position.z=14;fullCourtGroup.rotation.y=PI;fullCourtGroup.visible=false;
+  const fullCourtGroup=new T.Group();fullCourtGroup.position.z=20;fullCourtGroup.rotation.y=PI;fullCourtGroup.visible=false;
   for(const node of [...scene.children])if(!node.isLight&&node!==key.target)fullCourtGroup.add(node.clone(true));
   scene.add(fullCourtGroup);
   const farFill=new T.DirectionalLight(0xdce8ff,.75);farFill.position.set(-3,10,20);scene.add(farFill);farFill.visible=false;
@@ -818,7 +832,11 @@ function create(canvas){
   function resize(){renderer.setSize(innerWidth,innerHeight);camera.aspect=innerWidth/innerHeight;camera.fov=2*Math.atan(Math.tan(43*PI/360)*Math.max(1,1.25/camera.aspect))*180/PI;camera.updateProjectionMatrix();}
   const courtFrame=new T.Group();scene.add(courtFrame);
   for(const node of [...scene.children])if(node!==courtFrame&&(!node.isLight||node===skillLight)&&node!==key.target)courtFrame.add(node);
-  function setFullCourt(enabled,side=0){courtRoof.visible=!enabled;fullCourtGroup.children.forEach(o=>{if(o.userData.courtRoof||o.userData.courtEndWall)o.visible=false;});fullCourtGroup.visible=enabled;farFill.visible=enabled;courtFrame.rotation.y=enabled&&side?PI:0;courtFrame.position.z=enabled&&side?14:0;courtFrame.updateMatrixWorld(true);sun.shadow.camera.top=enabled?32:14;sun.shadow.camera.bottom=enabled?-32:-14;sun.shadow.camera.updateProjectionMatrix();}
+  function setFullCourt(enabled,side=0,spacious=enabled){
+    fullCourtGroup.visible=enabled;farFill.visible=enabled;
+    courtFrame.traverse(o=>{const type=o.userData.courtVariant;if(type==='floor'){o.scale.set(spacious?1.25:1,spacious?17/14:1,1);o.position.z=spacious?1.5:0;}if(type==='base'){o.scale.set(spacious?1.25:1,1,spacious?1.3:1);o.position.z=spacious?1.5:0;}if(type==='normal')o.visible=!spacious;if(type==='wide')o.visible=spacious;if(type==='scenery')o.scale.set(spacious?1.25:1,1,spacious?1.2:1);if(o.userData.courtRoof||o.userData.courtEndWall)o.visible=!enabled;});
+    courtRoof.visible=!spacious;courtFrame.rotation.y=enabled&&side?PI:0;courtFrame.position.z=enabled&&side?20:0;courtFrame.updateMatrixWorld(true);sun.shadow.camera.top=enabled?40:18;sun.shadow.camera.bottom=enabled?-40:-18;sun.shadow.camera.updateProjectionMatrix();
+  }
   function toWorld(v){courtFrame.updateMatrixWorld();return courtFrame.localToWorld(v);}
   function toCourt(v){courtFrame.updateMatrixWorld();return courtFrame.worldToLocal(v);}
   function addActor(root){courtFrame.add(root);}
@@ -875,14 +893,15 @@ const ballPos=new V(),ballVel=new V(),ballPrev=new V();let ballState='held',loos
 const playerPool=Array.from({length:10},(_,id)=>id).map(id=>({id,x:id===0?-1.3:1.0,z:id===0?3.0:1.0,vx:0,vz:0,yaw:PI,stride:0,stamina:1,held:id===0,hand:1,charge:null,chargeMove:0,chargeProfile:null,crossSide:1,crossDX:0,crossDZ:0,crossFromHand:1,burst:0,defRead:0,readX:0,readZ:0,follow:0,shotLift:false,releasePhase:1,landing:0,dunkStyle:0,jump:0,jumpV:0,block:0,reach:0,crossover:0,dunk:0,stealCD:0,moveCD:0,stun:0,guard:false,aiWait:.8,aiRelease:.8,aiSide:1,shootKind:'jump'}));
 let players=playerPool.slice(0,2),controlledId=0,passFlight=null;
 let attackTeam=0;
-const fullLook=new V(0,1,7);
-const courtMaxZ=()=>mode==='5v5'?20.6:6.6;
+const fullLook=new V(0,1,7);let fullCameraAngle=0;
+const courtMaxX=()=>isTeamMode()?9.0:7.1;
+const courtMaxZ=()=>mode==='5v5'?26.6:mode==='3v3'?9.6:6.6;
 function changeAttack(id){
   if(mode!=='5v5')return;
   const next=teamOf(id);if(next===attackTeam)return;
   // Change the simulation frame while preserving every player's physical world position.
-  for(const p of players){p.x=-p.x;p.z=14-p.z;p.vx=-p.vx;p.vz=-p.vz;p.yaw+=PI;p.readX=-p.readX;p.readZ=14-p.readZ;p.crossDX=-p.crossDX;p.crossDZ=-p.crossDZ;}
-  ballPos.x=-ballPos.x;ballPos.z=14-ballPos.z;ballPrev.x=-ballPrev.x;ballPrev.z=14-ballPrev.z;ballVel.x=-ballVel.x;ballVel.z=-ballVel.z;
+  for(const p of players){p.x=-p.x;p.z=20-p.z;p.vx=-p.vx;p.vz=-p.vz;p.yaw+=PI;p.readX=-p.readX;p.readZ=20-p.readZ;p.crossDX=-p.crossDX;p.crossDZ=-p.crossDZ;}
+  ballPos.x=-ballPos.x;ballPos.z=20-ballPos.z;ballPrev.x=-ballPrev.x;ballPrev.z=20-ballPrev.z;ballVel.x=-ballVel.x;ballVel.z=-ballVel.z;
   attackTeam=next;world.clearSkillEffects();world.setFullCourt(true,attackTeam);cleared=true;
 }
 
@@ -936,7 +955,7 @@ function drawRoster(){
   $('roster-p2').disabled=practice;
   [0,1].forEach(i=>$('roster-p'+(i+1)).setAttribute('aria-pressed',String(rosterSlot===i)));
   const scroll=$('roster-grid').scrollLeft;
-  $('roster-grid').innerHTML=Object.values(ROSTER).map(r=>`<button class="athlete-card" data-character="${r.id}" aria-pressed="${selected[rosterSlot]===r.id}" style="--player:${r.color}"><span class="jersey-no">${r.number}</span><img class="star-portrait" src="${portraitCache[r.id]}" alt="${r.name}三维角色模型"><strong>${r.name}</strong><span class="role">${r.role}</span><span class="tier tier-${r.tier.replace('+','plus')}">${r.tier} 级</span><span class="english">${r.english}</span>${[['篮下','finish'],['中投','mid'],['三分','three'],['防守','defense'],['速度','speedRating'],['力量','strength']].map(([label,k])=>`<span class="rating">${label}<i><em style="width:${r[k]}%"></em></i><b>${r[k]}</b></span>`).join('')}<span class="card-skill">${r.skill}<br><b>${r.energyCost} 次充能 · ${r.skillPoints===4?'最多4':r.skillPoints}分</b> · ${r.perk}</span></button>`).join('');
+  $('roster-grid').innerHTML=Object.values(ROSTER).map(r=>`<button class="athlete-card" data-character="${r.id}" aria-pressed="${selected[rosterSlot]===r.id}" style="--player:${r.color}"><span class="jersey-no">${r.number}</span><img class="star-portrait" src="${portraitCache[r.id]}" alt="${r.name}三维角色模型"><strong>${r.name}</strong><span class="role">${r.role}</span><span class="tier tier-${r.tier.replace('+','plus')}">${r.tier} 级</span><span class="english">${r.english}</span>${[['篮下','finish'],['中投','mid'],['三分','three'],['防守','defense'],['速度','speedRating'],['力量','strength']].map(([label,k])=>`<span class="rating">${label}<i><em style="width:${r[k]}%"></em></i><b>${r[k]}</b></span>`).join('')}<span class="card-skill">${r.skill}<br><b>${r.energyCost} 次充能 · ${r.skillPoints>=4?'最多'+r.skillPoints:r.skillPoints}分</b> · ${r.perk}</span></button>`).join('');
   $('roster-grid').querySelectorAll('button').forEach(b=>b.onclick=()=>{const key=b.dataset.character,duplicate=team?slots.find(id=>id!==rosterSlot&&id%2===rosterSlot%2&&selected[id]===key):undefined;if(duplicate!==undefined)applyCharacter(duplicate,selected[rosterSlot]);applyCharacter(rosterSlot,key);drawRoster();});
   const grid=$('roster-grid');grid.scrollLeft=scroll;const chosen=grid.querySelector('[aria-pressed=true]');if(chosen){const x=chosen.offsetLeft-grid.offsetLeft;if(x<grid.scrollLeft||x+chosen.offsetWidth>grid.scrollLeft+grid.clientWidth)grid.scrollLeft=x;}
   const displayCtrl=document.querySelector('.mode.selected').dataset.mode==='pvp'?ctrlPvp:ctrlAi;const selectedPlayer=playerPool[rosterSlot];
@@ -954,41 +973,85 @@ function skillRange(p){const d=distance(p);switch(p.character){
 }}
 function chargeValue(p){const profile=p.chargeProfile,t=(p.charge||0)/profile.duration;return profile.freeThrow?t+.052*Math.sin(2*PI*t):t;}
 function chargeAtValue(profile,value){let t=value;if(profile.freeThrow){let lo=0,hi=1.1;for(let i=0;i<32;i++){t=(lo+hi)/2;if(t+.052*Math.sin(2*PI*t)<value)lo=t;else hi=t;}}return t*profile.duration;}
+// One timing decision, followed by six distinct simultaneous ball flights.
+const sgaBallMeshes=[];
+function clearSgaBurst(){for(const mesh of sgaBallMeshes)mesh.visible=false;ball.visible=true;$('sga-timing').classList.add('hidden');}
+function sgaMesh(index){
+  if(!sgaBallMeshes[index]){const mesh=ball.clone();mesh.visible=false;ball.parent.add(mesh);sgaBallMeshes[index]=mesh;}
+  return sgaBallMeshes[index];
+}
+function makeSgaZones(){
+  const parts=[];
+  for(const [made,total,count] of [[2,.76,3],[4,.20,2],[6,.04,1]]){
+    const weights=Array.from({length:count},()=>.8+Math.random()*.4),sum=weights.reduce((a,b)=>a+b,0);
+    weights.forEach(w=>parts.push({made,width:total*w/sum}));
+  }
+  for(let i=parts.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[parts[i],parts[j]]=[parts[j],parts[i]];}
+  let at=0;return parts.map((z,i)=>{const start=at;at+=z.width;return {made:z.made,start,end:i===parts.length-1?1:at};});
+}
+function sgaResult(zones,value){const v=clamp(value,0,1);return (zones.find(z=>v>=z.start&&v<z.end)||zones[zones.length-1]).made;}
 function startFreeThrows(p){
-  signatureAction=null;shot=null;p.charge=null;p.held=false;p.follow=p.dunk=p.jump=p.jumpV=0;p.skillShot=null;p.vx=p.vz=0;p.skillPose='flop';p.skillPhase=0;owner=-1;ballState='flop';meterFeedback=null;keys.clear();
-  freeThrows={shooter:p.id,index:0,total:4,made:0,results:[],phase:'flop',time:0,profile:null};sound('squeak',.7);showToast('FOUL CALL','倒地造犯规','获得四次罚球 · 每球 1 分',1.3);
+  clearSgaBurst();signatureAction=null;shot=null;p.charge=null;p.held=false;p.follow=p.dunk=p.jump=p.jumpV=0;p.skillShot=null;p.vx=p.vz=0;p.skillPose='flop';p.skillPhase=0;owner=-1;ballState='flop';meterFeedback=null;keys.clear();
+  freeThrows={shooter:p.id,index:0,total:6,made:0,results:[],phase:'flop',time:0,profile:null,flights:[]};sound('squeak',.7);showToast('PHANTOM SIX','倒地造犯规','一次判定 · 极速六连罚',1.1);
 }
 function prepareFreeThrow(){
-  const f=freeThrows;f.phase='ready';f.time=0;f.profile={kind:'freeThrow',label:`罚球 ${f.index+1} / 4`,freeThrow:true,duration:.78+Math.random()*.12,target:[.59,.77,.64,.72][f.index]+(Math.random()-.5)*.05,width:.052-f.index*.003};
+  const f=freeThrows;f.phase='ready';f.time=0;f.zones=makeSgaZones();f.profile={kind:'freeThrow',label:'无影手六连罚',freeThrow:true,duration:1.25+Math.random()*.12,target:.65,width:.14};
   shot=null;ballState='held';owner=f.shooter;lastOwner=owner;cleared=true;shotClock=24;liveTime=0;meterFeedback=null;keys.clear();
   players.forEach(p=>{p.x=p.id===owner?0:(p.id%2?-2.3:2.3);p.z=p.id===owner?-1.05:-4.5+Math.floor(p.id/2)*1.2;p.vx=p.vz=p.jump=p.jumpV=p.follow=p.dunk=p.block=p.reach=p.crossover=0;p.charge=null;p.chargeProfile=null;p.held=p.id===owner;p.yaw=PI;p.skillPose=null;p.skillShot=null;p.shotLift=false;p.aiWait=.65;p.aiRelease=null;});updateHeld();
-  showToast('FREE THROW',`第 ${f.index+1} / 4 罚`,'观察新的绿区 · 按住投篮键，松手出手',1.1);
+  $('sga-track').querySelectorAll('.segment').forEach(el=>el.remove());
+  for(const z of f.zones){const el=document.createElement('span');el.className='segment s'+z.made;el.style.width=((z.end-z.start)*100)+'%';el.textContent=z.made;$('sga-track').insertBefore(el,$('sga-pointer'));}
+  showToast('CHOOSE YOUR FINISH','锁定 2 / 4 / 6 球','按住投篮，松手选择 · 金色区域最小',1.1);
+}
+function releaseSgaBurst(p,value,forcedMade=null){
+  const f=freeThrows;if(!f||f.phase!=='ready'||f.shooter!==p.id)return;
+  f.selected=forcedMade??sgaResult(f.zones,value);f.locked=clamp(value,0,1);f.phase='burst';f.time=0;
+  const results=Array.from({length:6},(_,i)=>i<f.selected);
+  for(let i=5;i>0;i--){const j=Math.floor(Math.random()*(i+1));[results[i],results[j]]=[results[j],results[i]];}
+  f.flights=results.map((made,i)=>({made,delay:i*.105,resolved:false,launched:false,from:new V(p.x+(i%2?.14:-.14),2.12*starOf(p).height,p.z-.25),to:new V(hoop.x+(made?0:(i%2?.58:-.58)),hoop.y,hoop.z+(made?0:.25))}));
+  p.charge=null;p.chargeProfile=null;p.held=false;p.skillPose='sgaRapid';p.skillPhase=0;p.follow=0;owner=-1;ballState='sgaBurst';ball.visible=false;keys.clear();meterFeedback=null;
+  showToast('PHANTOM HANDS',`锁定 ${f.selected} 球！`,'无影手 · 六球瞬发',1.4);sound('squeak',.65);
 }
 function finishFreeThrow(made){
-  const f=freeThrows;if(!f||f.phase!=='flight')return;f.results.push(!!made);if(made)f.made++;f.index++;f.phase='wait';f.time=0;
-  showToast(made?'FREE THROW MADE':'FREE THROW MISSED',made?'+1 · 罚球命中':'罚球未中',`已完成 ${f.index} / 4 · 命中 ${f.made} 球`,.9);
+  const f=freeThrows;if(!f||f.phase!=='burst')return;f.results.push(made);f.index++;
+  if(made){f.made++;score[teamOf(f.shooter)]++;stats[f.shooter].made++;net.impulse(0,0);sound('swish',.5,hoop);cameraShake=.045;}else sound('rim',.28,hoop);
+  updateHud();
 }
 function updateFreeThrows(dt){
   const f=freeThrows,p=players[f.shooter];f.time+=dt;
-  if(f.phase==='flop'){p.skillPhase=clamp(f.time/.75,0,1);ballPos.set(p.x+.4,.12+Math.abs(Math.sin(f.time*7))*.3,p.z);if(f.time>1.05)prepareFreeThrow();return;}
+  if(f.phase==='flop'){p.skillPhase=clamp(f.time/.7,0,1);ballPos.set(p.x+.4,.12+Math.abs(Math.sin(f.time*7))*.3,p.z);if(f.time>.85)prepareFreeThrow();return;}
   if(f.phase==='ready'){
     if(!isHuman(p.id)){
-      if(p.charge===null&&f.time>.65){startCharge(p);p.aiRelease=clamp(f.profile.target+(Math.random()-.5)*(difficulty==='elite'?.075:difficulty==='rookie'?.18:.12),.1,.95);}
+      if(p.charge===null&&f.time>.55){startCharge(p);p.aiRelease=.06+Math.random()*.88;}
       if(p.charge!==null&&chargeValue(p)>=p.aiRelease)releaseShot(p);
-    }else if(f.time>8&&p.charge===null){startCharge(p);releaseShot(p);}
-    updatePlayer(p,{x:0,z:0,sprint:false},dt);if(f.phase==='ready')updateHeld();return;
+    }else if(f.time>8&&p.charge===null)releaseSgaBurst(p,0,2);
+    if(f.phase==='ready'){updatePlayer(p,{x:0,z:0,sprint:false},dt);if(f.phase==='ready')updateHeld();}return;
   }
-  if(f.phase==='flight'){updateBall(dt);if(f.phase==='flight'&&(ballPos.y<=BALL_R+.01||f.time>2.8))finishFreeThrow(false);}
-  else if(f.phase==='wait'){
-    updateBall(dt,true);
-    if(f.time>.95){
-      if(f.index<4)prepareFreeThrow();else{
-        const shooter=f.shooter,made=f.made;freeThrows=null;shot=null;ballState='dead';owner=-1;players.forEach(p=>{p.held=false;p.skillPose=null;p.charge=null;});ballVel.set(0,0,0);keys.clear();
-        if(mode==='practice'&&score[0]>highScore){highScore=score[0];try{localStorage.setItem('after-hours-practice-best',String(highScore));}catch(e){}}
-        showToast('FOUR SHOTS',`四罚 ${made} 中`,mode==='practice'?'返回练球':'罚球结束 · 对方发球',1.25);queueReset(mode==='practice'?0:otherTeamPlayer(shooter),1.25);
-      }
+  if(f.phase==='burst'){
+    p.skillPhase=f.time;
+    f.flights.forEach((flight,i)=>{
+      const age=f.time-flight.delay,mesh=sgaMesh(i);mesh.visible=age>=0&&age<.96;if(age<0)return;
+      if(!flight.launched){flight.launched=true;stats[p.id].attempts++;sound('grip',.25);}
+      const t=clamp(age/.68,0,1);mesh.position.copy(flight.from).lerp(flight.to,t);mesh.position.y+=Math.sin(t*PI)*1.65;
+      if(age>.68){const fall=age-.68;mesh.position.y-=fall*5.2;if(!flight.made)mesh.position.x+=(i%2?1:-1)*fall*2;}
+      mesh.rotation.x=age*22;mesh.rotation.z=i*.9;
+      if(age>=.68&&!flight.resolved){flight.resolved=true;finishFreeThrow(flight.made);}
+    });
+    if(f.time>1.58){
+      const shooter=f.shooter,made=f.made;clearSgaBurst();freeThrows=null;shot=null;ballState='dead';owner=-1;p.skillPose=null;p.follow=.25;ballPos.copy(hoop);ballPos.y-=.8;ballVel.set(0,0,0);players.forEach(q=>{q.held=false;q.charge=null;});keys.clear();
+      if(mode==='practice'&&score[0]>highScore){highScore=score[0];try{localStorage.setItem('after-hours-practice-best',String(highScore));}catch(e){}}
+      showToast('PHANTOM SIX',`六罚 ${made} 中 · +${made}`,'无影手结束 · '+(mode==='practice'?'返回练球':'对方发球'),1.3);queueReset(mode==='practice'?0:otherTeamPlayer(shooter),1.3);updateHud();
     }
   }
+}
+function updateSgaMeter(){
+  const f=freeThrows,visible=state==='playing'&&f&&(f.phase==='ready'||f.phase==='burst')&&isHuman(f.shooter),meter=$('shotmeter');$('sga-timing').classList.add('hidden');meter.classList.toggle('hidden',!visible);if(!visible)return;
+  const p=players[f.shooter],value=f.phase==='burst'?f.locked:p.charge===null?0:clamp(chargeValue(p),0,1),anchor=world.toWorld(new V(p.x,1.5,p.z));camera.updateMatrixWorld();anchor.project(camera);
+  meter.style.left=clamp((anchor.x+1)*innerWidth/2-146,8,innerWidth-126)+'px';meter.style.top=clamp((1-anchor.y)*innerHeight/2-92,100,Math.max(100,innerHeight-275))+'px';meter.style.opacity='1';meter.classList.remove('free-throw-meter','ready','perfect','late');
+  $('meter-zone').style.display='none';$('meter-fill').style.display='none';$('sga-arc-zones').style.display='';
+  const svgNS='http://www.w3.org/2000/svg',group=$('sga-arc-zones');
+  if(group.dataset.layout!==JSON.stringify(f.zones)){group.dataset.layout=JSON.stringify(f.zones);group.replaceChildren();for(const z of f.zones){const path=document.createElementNS(svgNS,'path');path.setAttribute('d',meterPath(z.start+.002,z.end-.002));path.setAttribute('fill','none');path.setAttribute('stroke',z.made===6?'#ffe27a':z.made===4?'#8feaaa':'#79ccee');path.setAttribute('stroke-width','10');path.style.strokeLinecap='butt';group.appendChild(path);const point=meterPoint((z.start+z.end)/2),label=document.createElementNS(svgNS,'text');label.setAttribute('x',point.x+12);label.setAttribute('y',point.y+4);label.setAttribute('fill','#ffffff');label.setAttribute('font-size','12');label.setAttribute('font-weight','900');label.textContent=z.made;group.appendChild(label);}}
+  const tip=meterPoint(value);$('meter-tick').setAttribute('x1',tip.x-11);$('meter-tick').setAttribute('x2',tip.x+11);$('meter-tick').setAttribute('y1',tip.y);$('meter-tick').setAttribute('y2',tip.y);$('meter-dot').setAttribute('cx',tip.x);$('meter-dot').setAttribute('cy',tip.y);
+  $('meter-kind').textContent='无影手 · 六连罚';$('meter-rhythm').textContent='蓝2 · 绿4 · 金6';$('meter-readout').textContent=f.phase==='burst'?`锁定 ${f.selected} 球`:p.charge===null?'按住投篮':`松手：${sgaResult(f.zones,value)} 球`;$('meter-time').textContent='金色极窄';$('contest').textContent='随机碎片区间';document.querySelector('#shotmeter .meter-key kbd').textContent=inputMode==='touch'?'投篮':keyLabel(controlFor(p.id).shoot);meter.setAttribute('aria-label','无影手六连罚，'+$('meter-readout').textContent);
 }
 function beginSignature(p){
   const d=distance(p),kind=p.character,duration=({durant:1.15,yang:1.35,kyrie:1.35,jokic:1.45,zhou:4.4,zhang:2.15,zhu:1.95,ma:3.3})[kind]|| (kind==='lebron'?clamp(d/5.4+.48,.85,3.0):kind==='shaq'?1.18:kind==='wemby'?1.48:kind==='hakeem'?1.2:kind==='doncic'?1.08:kind==='iverson'?.86:kind==='george'?.80:.78);
@@ -1012,7 +1075,7 @@ function finishSignatureDunk(p,a){
   ballPos.set(hoop.x,3.30,hoop.z);ballPrev.copy(ballPos);ballVel.set(0,-5.8,0);
   shot={id:++shotSerial,shooter:p.id,points:2,perfect:true,contested:mode==='practice'?0:pDist(p,nearestOpponent(p))<1.7?.9:.2,skill:a.kind,dunk:{x:p.x,z:p.z,dx:Math.sin(p.yaw),dz:Math.cos(p.yaw)},scored:false,blocked:false,touchedRim:false,touchedBoard:false,time:0};
   cameraShake=a.kind==='zhou'?.32:a.kind==='shaq'?.22:.13;world.burst(ballPos);sound('grip',.7);
-  if(a.kind==='zhou'){royalSound(true);world.royalImpact(hoop);sound('rim',1,hoop);const def=nearestOpponent(p),gap=pDist(p,def);if(mode!=='practice'&&gap<3.5){const dx=def.x-hoop.x,dz=def.z-hoop.z,l=Math.hypot(dx,dz)||1;def.x=clamp(def.x+dx/l*1.5,-7,7);def.z=clamp(def.z+(Math.abs(dz)<.1?1:dz/l)*1.5,-6.6,courtMaxZ());def.stun=1.1;}}
+  if(a.kind==='zhou'){royalSound(true);world.royalImpact(hoop);sound('rim',1,hoop);const def=nearestOpponent(p),gap=pDist(p,def);if(mode!=='practice'&&gap<3.5){const dx=def.x-hoop.x,dz=def.z-hoop.z,l=Math.hypot(dx,dz)||1;def.x=clamp(def.x+dx/l*1.5,-courtMaxX()+.1,courtMaxX()-.1);def.z=clamp(def.z+(Math.abs(dz)<.1?1:dz/l)*1.5,-6.6,courtMaxZ());def.stun=1.1;}}
 }
 function updateSignature(dt){
   const a=signatureAction,p=players[a.shooter],r=starOf(p),t=clamp((a.time+=dt)/a.duration,0,1),smooth=u=>{u=clamp(u,0,1);return u*u*(3-2*u);},fx=Math.sin(a.yaw),fz=Math.cos(a.yaw),rx=Math.cos(a.yaw),rz=-Math.sin(a.yaw),oldX=p.x,oldZ=p.z;
@@ -1043,16 +1106,16 @@ function updateSignature(dt){
     if(t>.3&&!a.fakeDone){a.fakeDone=true;world.spawnGhosts(athletes[p.id],new V(p.x,0,p.z),p.yaw,0xab70ff);}
   }else if(a.kind==='yang'){
     const u=smooth(t),phase=smooth(t/.75);p.yaw=a.yaw+2*PI*phase;
-    p.x=clamp(a.x+fx*.65*u+rx*a.side*Math.sin(t*PI)*.65,-7,7);p.z=clamp(a.z+fz*.65*u+rz*a.side*Math.sin(t*PI)*.65,-6.6,courtMaxZ());
+    p.x=clamp(a.x+fx*.65*u+rx*a.side*Math.sin(t*PI)*.65,-courtMaxX()+.1,courtMaxX()-.1);p.z=clamp(a.z+fz*.65*u+rz*a.side*Math.sin(t*PI)*.65,-6.6,courtMaxZ());
     p.skillHold=[.40,lerp(1.25,2.28,smooth((t-.55)/.45)),.16];p.skillPose=t>.65?'hook':'dream';p.jump=smooth((t-.65)/.35)*.46;
-    const def=nearestOpponent(p);if(mode!=='practice'&&pDist(p,def)<1.7){def.x=clamp(def.x-rx*a.side*dt*1.8,-7,7);def.z=clamp(def.z-rz*a.side*dt*1.8,-6.6,courtMaxZ());def.stun=.6;}
+    const def=nearestOpponent(p);if(mode!=='practice'&&pDist(p,def)<1.7){def.x=clamp(def.x-rx*a.side*dt*1.8,-courtMaxX()+.1,courtMaxX()-.1);def.z=clamp(def.z-rz*a.side*dt*1.8,-6.6,courtMaxZ());def.stun=.6;}
   }else if(a.kind==='kyrie'){
     const u=smooth(t),sway=Math.sin(t*4*PI)*1.0*(1-u),endZ=hoop.z+1.05;
-    p.x=clamp(lerp(a.x,a.side*.55,u)+rx*sway,-7,7);p.z=clamp(lerp(a.z,endZ,u)+rz*sway,-6.6,courtMaxZ());
+    p.x=clamp(lerp(a.x,a.side*.55,u)+rx*sway,-courtMaxX()+.1,courtMaxX()-.1);p.z=clamp(lerp(a.z,endZ,u)+rz*sway,-6.6,courtMaxZ());
     p.yaw=a.yaw+2*PI*smooth((t-.45)/.4);p.crossover=t<.6?.46*(1-(t*4)%1):0;p.crossSide=Math.sin(t*4*PI)>0?1:-1;p.crossFromHand=p.crossSide>0?0:1;p.hand=1-p.crossFromHand;
     if(t>.60){p.skillHold=[.32,lerp(1.05,2.05,smooth((t-.60)/.40)),.34];p.jump=Math.sin(smooth((t-.60)/.40)*PI*.65)*.6;p.skillPose='space';}
   }else if(a.kind==='jokic'){
-    const u=smooth((t-.4)/.6);p.yaw=a.yaw+Math.sin(t*PI)*.85;p.x=clamp(a.x-fx*.45*u,-7,7);p.z=clamp(a.z-fz*.45*u,-6.6,courtMaxZ());
+    const u=smooth((t-.4)/.6);p.yaw=a.yaw+Math.sin(t*PI)*.85;p.x=clamp(a.x-fx*.45*u,-courtMaxX()+.1,courtMaxX()-.1);p.z=clamp(a.z-fz*.45*u,-6.6,courtMaxZ());
     p.skillHold=t<.4?[.44,1.27,-.12]:[.16,lerp(1.3,2.18,u),.15];p.skillPose=t>.4?'oneleg':'dream';p.jump=u*.35;
     if(t>.3&&!a.fakeDone){a.fakeDone=true;const def=nearestOpponent(p);if(mode!=='practice'&&pDist(p,def)<3){def.reach=.8;def.stun=1.0;}}
   }else if(a.kind==='zhou'){
@@ -1073,20 +1136,20 @@ function updateSignature(dt){
 
   }else if(a.kind==='iverson'){
     const sway=Math.sin(t*PI*2)*1.32;
-    p.x=clamp(a.x+fx*t*1.20+rx*sway,-7,7);p.z=clamp(a.z+fz*t*1.20+rz*sway,-6.6,courtMaxZ());p.crossover=.46*(1-(t*2)%1);p.crossSide=t<.5?1:-1;p.crossFromHand=t<.5?0:1;p.hand=t<.5?1:0;
+    p.x=clamp(a.x+fx*t*1.20+rx*sway,-courtMaxX()+.1,courtMaxX()-.1);p.z=clamp(a.z+fz*t*1.20+rz*sway,-6.6,courtMaxZ());p.crossover=.46*(1-(t*2)%1);p.crossSide=t<.5?1:-1;p.crossFromHand=t<.5?0:1;p.hand=t<.5?1:0;
   }else if(a.kind==='kobe'||a.kind==='doncic'){
     const retreat=a.kind==='doncic'?Math.max(1.05,7.15-a.distance):.88;
     const step=a.kind==='doncic'?(t<.48?.5*smooth(t/.48):.5+.5*smooth((t-.48)/.52)):smooth(t);
-    p.x=clamp(a.x-fx*step*retreat,-7,7);p.z=clamp(a.z-fz*step*retreat,-6.6,courtMaxZ());
+    p.x=clamp(a.x-fx*step*retreat,-courtMaxX()+.1,courtMaxX()-.1);p.z=clamp(a.z-fz*step*retreat,-6.6,courtMaxZ());
     p.jump=a.kind==='doncic'?Math.sin(clamp((t-.52)/.48,0,1)*PI*.65)*.5:Math.sin(t*PI*.65)*.65;
     p.chargeProfile=shotProfile(p);p.charge=chargeAtValue(p.chargeProfile,lerp(.3,p.chargeProfile.target,t));p.follow=.7;
     p.skillHold=[.16,lerp(1.46,2.16,smooth(t)),lerp(.36,.12,smooth(t))];
   }else if(a.kind==='george'){
-    const side=a.side,e=smooth(t);p.x=clamp(a.x+rx*side*1.4*e-fx*.30*e,-7,7);p.z=clamp(a.z+rz*side*1.4*e-fz*.30*e,-6.6,courtMaxZ());p.yaw=a.yaw+2*PI*smooth(clamp(t/.70,0,1));p.jump=Math.sin(clamp((t-.45)/.55,0,1)*PI*.7)*.55;
+    const side=a.side,e=smooth(t);p.x=clamp(a.x+rx*side*1.4*e-fx*.30*e,-courtMaxX()+.1,courtMaxX()-.1);p.z=clamp(a.z+rz*side*1.4*e-fz*.30*e,-6.6,courtMaxZ());p.yaw=a.yaw+2*PI*smooth(clamp(t/.70,0,1));p.jump=Math.sin(clamp((t-.45)/.55,0,1)*PI*.7)*.55;
     p.skillHold=[.18,lerp(1.28,2.2,smooth((t-.35)/.65)),.25];p.follow=.65;
   }else if(a.kind==='hakeem'){
     const phase=t<.3?smooth(t/.3):t<.62?1-smooth((t-.3)/.32):-smooth((t-.62)/.38);
-    p.yaw=a.yaw+phase*.95;p.x=clamp(a.x+rx*phase*.42+fx*t*.32,-7,7);p.z=clamp(a.z+rz*phase*.42+fz*t*.32,-6.6,courtMaxZ());
+    p.yaw=a.yaw+phase*.95;p.x=clamp(a.x+rx*phase*.42+fx*t*.32,-courtMaxX()+.1,courtMaxX()-.1);p.z=clamp(a.z+rz*phase*.42+fz*t*.32,-6.6,courtMaxZ());
     p.skillHold=t<.64?[.12,1.35+Math.sin(t/.64*PI*2)**2*.64,.30]:[.44,lerp(1.6,2.3,smooth((t-.64)/.36)),.13];
     p.jump=t<.65?0:Math.sin((t-.65)/.35*PI*.6)*.56;
     if(t>.35&&!a.fakeDone){a.fakeDone=true;const def=nearestOpponent(p);if(mode!=='practice'&&pDist(p,def)<2.3){def.jumpV=3.4;def.stun=1.0;}}
@@ -1097,7 +1160,7 @@ function updateSignature(dt){
       const u=clamp(t/.82,0,1);p.x=lerp(a.x,endX,u);p.z=lerp(a.z,endZ,u);p.yaw=Math.atan2(hoop.x-p.x,hoop.z-p.z);
       const lift=smooth((t-.74)/.26);p.jump=lift*Math.max(.2,3.32-2.20*r.height);p.skillHold=[.14,lerp(1.32,2.20,lift),.31];
       const def=nearestOpponent(p),gap=pDist(p,def);
-      if(mode!=='practice'&&gap<1.02){const dx=def.x-p.x,dz=def.z-p.z,l=gap||1,nx=gap>.05?dx/l:Math.sin(p.yaw),nz=gap>.05?dz/l:Math.cos(p.yaw),push=1.02-gap;def.x=clamp(def.x+nx*push,-7.1,7.1);def.z=clamp(def.z+nz*push,-6.8,courtMaxZ());def.stun=.55;def.readX=p.x;def.readZ=p.z;def.defRead=.5;}
+      if(mode!=='practice'&&gap<1.02){const dx=def.x-p.x,dz=def.z-p.z,l=gap||1,nx=gap>.05?dx/l:Math.sin(p.yaw),nz=gap>.05?dz/l:Math.cos(p.yaw),push=1.02-gap;def.x=clamp(def.x+nx*push,-courtMaxX(),courtMaxX());def.z=clamp(def.z+nz*push,-6.8,courtMaxZ());def.stun=.55;def.readX=p.x;def.readZ=p.z;def.defRead=.5;}
     }else if(a.kind==='shaq'){
       const u=smooth(t),orbit=Math.sin(t*PI)*.44;p.x=lerp(a.x,endX,u)+rx*Math.sin(t*4*PI)*orbit;p.z=lerp(a.z,endZ,u)+rz*Math.sin(t*4*PI)*orbit;
       const yawDelta=Math.atan2(Math.sin(PI-a.yaw),Math.cos(PI-a.yaw));p.yaw=a.yaw+(4*PI+yawDelta)*u;const endJump=Math.max(.1,3.32-2.20*r.height);p.jump=Math.sin(t*PI)*1.0+endJump*u;p.skillHold=[.06,lerp(1.28,2.20,smooth(t/.6)),.30];
@@ -1107,7 +1170,7 @@ function updateSignature(dt){
       if(t>.14&&t<.64){p.skillDetached=true;const u=(t-.14)/.50,origin=new V(...a.origin),catchPoint=new V(hoop.x,4.15,hoop.z+.14);ballPos.copy(origin).lerp(catchPoint,u);ballPos.y+=Math.sin(u*PI)*2.1;}
       if(t>=.64&&!a.fakeDone){a.fakeDone=true;world.burst(ballPos);sound('grip',.65);}
     }
-    p.x=clamp(p.x,-7.1,7.1);p.z=clamp(p.z,-6.8,courtMaxZ());
+    p.x=clamp(p.x,-courtMaxX(),courtMaxX());p.z=clamp(p.z,-6.8,courtMaxZ());
   }
   p.vx=(p.x-oldX)/dt;p.vz=(p.z-oldZ)/dt;p.stride+=Math.hypot(p.x-oldX,p.z-oldZ)*5;
   const def=nearestOpponent(p);if(def.jump>0||def.jumpV>0){def.jumpV-=GRAVITY*dt;def.jump=Math.max(0,def.jump+def.jumpV*dt);if(!def.jump)def.jumpV=0;}
@@ -1164,7 +1227,7 @@ function activePerk(p){
 function updateHud(){
   updateTouchHUD();
   $('ft-panel').classList.toggle('hidden',!freeThrows);
-  if(freeThrows){const f=freeThrows;$('ft-title').textContent=names[f.shooter]+` · 四次罚球`;$('ft-results').textContent=Array.from({length:4},(_,i)=>i<f.results.length?(f.results[i]?'●':'×'):'○').join('');$('ft-instruction').textContent=f.phase==='ready'?`第 ${f.index+1}/4 罚 · 按住 ${inputMode==='touch'?'投篮':keyLabel(controlFor(f.shooter).shoot)}，绿区松手。指针变速，${Math.max(0,8-f.time).toFixed(0)} 秒内开始。`:f.phase==='flop'?'倒地造犯规，准备走上罚球线':f.phase==='flight'?'罚球飞行中，双方不能抢板':'等待下一次罚球';}
+  if(freeThrows){const f=freeThrows;$('ft-title').textContent=names[f.shooter]+' · 无影手六连罚';$('ft-results').textContent=Array.from({length:6},(_,i)=>i<f.results.length?(f.results[i]?'●':'×'):'○').join('');$('ft-instruction').textContent=f.phase==='ready'?'一次松手决定 2 / 4 / 6 球 · 区间每次随机':f.phase==='flop'?'倒地造犯规，准备六连罚':`锁定 ${f.selected} 球 · 极速出手中`;}
   $('score0').textContent=String(score[0]).padStart(2,'0');$('score1').textContent=String(score[1]).padStart(2,'0');
   $('clock').textContent=mode==='practice'?'∞':shotClock.toFixed(1);$('clock').style.color=shotClock<5?'#ff9361':'#bcf18b';world.updateClock(mode==='practice'?24:shotClock);
   $('possession').textContent=freeThrows?'罚球回合 · '+names[freeThrows.shooter]:resetDelay>0?'等待下一回合':ballState==='returning'?'自动回球中':magnetFlight?'朱东裕 · 引力吸板':passFlight?names[passFlight.from]+' → '+names[passFlight.to]:owner>=0?names[owner]+'球权':(ballState==='dunk'||ballState==='backboard')?'起跳扣篮':ballState==='flight'?'投篮飞行中':'争抢篮板';
@@ -1172,7 +1235,7 @@ function updateHud(){
   hudPlayers().forEach((p,i)=>{$('stamina'+i).style.width=Math.round(p.stamina*100)+'%';$('action'+i).textContent=freeThrows?(freeThrows.shooter===p.id?'罚球回合':'等待罚球'):p.dunk>0?'篮下终结':p.crossover>0?'变向切入':p.charge!==null?'寻找节奏':p.held?'持球进攻':mode==='practice'?'等待回球':ballState==='loose'?'争抢篮板':'防守中';});
   hudPlayers().forEach((p,i)=>{const r=starOf(p);const meter=$('energy'+i),count=energyMax(p);if(meter.children.length!==count)meter.innerHTML='<i></i>'.repeat(count);meter.querySelectorAll('i').forEach((el,n)=>el.classList.toggle('on',n<p.energy));const perk=activePerk(p);$('perk'+i).textContent=r.tier+' 级 · '+r.perk+(perk?' · '+perk:'');$('perk'+i).classList.toggle('active',!!perk);const b=$('skill'+i);b.textContent=`${isHuman(p.id)?(inputMode==='touch'?'技能':keyLabel(controlFor(p.id).skill)):'CPU'} · ${r.skill} · ${p.energy}/${energyMax(p)}`;b.classList.toggle('ready',p.energy===energyMax(p));b.disabled=!isHuman(p.id);$('skill-hint'+i).textContent=p.energy===energyMax(p)?r.range+' · 持球释放':(dunkCharges(p)?'完美出手 / 成功扣篮 +1':'完美出手 +1');});
   const p=players[isTeamMode()?controlledId:0],profile=shotProfile(p),canDunk=canDirectDunk(p);
-  $('shot-context').textContent=freeThrows?'观察每球变化的绿区与变速指针':p.held?(canDunk?`篮下 · 点按 ${keyLabel(ctrl[0].shoot)} 直接扣篮`:`${profile.label} · ${distance(p).toFixed(1)} 米 · 绿区约 ${(profile.duration*profile.target).toFixed(2)} 秒`):mode==='practice'?'R 取回篮球，继续当前点位':`无球 ${keyLabel(ctrl[0].shoot)} 盖帽 · ${keyLabel(ctrl[0].move)} 抢断`;
+  $('shot-context').textContent=freeThrows?'随机碎片区间：2 球最大，4 球次之，6 球最小':p.held?(canDunk?`篮下 · 点按 ${keyLabel(ctrl[0].shoot)} 直接扣篮`:`${profile.label} · ${distance(p).toFixed(1)} 米 · 绿区约 ${(profile.duration*profile.target).toFixed(2)} 秒`):mode==='practice'?'R 取回篮球，继续当前点位':`无球 ${keyLabel(ctrl[0].shoot)} 盖帽 · ${keyLabel(ctrl[0].move)} 抢断`;
   hudPlayers().forEach((p,i)=>{$('player-name'+i).textContent=names[p.id]+(isTeamMode()&&i===0?' · 你':'');document.querySelectorAll('.status-number')[i].textContent=starOf(p).number;});updateTeamPanel();
   $('practice-recall').classList.toggle('hidden',mode!=='practice');
   $('practice-stats').classList.toggle('hidden',mode!=='practice');
@@ -1236,6 +1299,7 @@ function startCharge(p){
 function releaseShot(p){
   if(signatureAction)return;
   if(p.charge===null||!p.held||state!=='playing'||(!cleared&&mode!=='practice'))return;
+  if(freeThrows?.shooter===p.id&&freeThrows.phase==='ready'){releaseSgaBurst(p,chargeValue(p));return;}
   const s=shotSettings(p),profile=p.chargeProfile,special=p.skillShot,isDunk=p.shootKind==='dunk',isFT=!!profile.freeThrow,value=isDunk?profile.target:chargeValue(p),error=value-profile.target,perfect=!!special||(!isDunk&&Math.abs(error)<=s.window/2);if(special)s.contest=0;
   if(!isDunk&&isHuman(p.id))meterFeedback={id:p.id,profile:{...profile},window:s.window,contest:s.contest,value:clamp(value,0,1),perfect,label:perfect?(s.contest>.35?'完美时机 · 受干扰':'完美出手'):error<0?'出手偏早':'出手偏晚',ttl:.65};
   const releasePosition=shotBallPosition(p);p.releasePhase=clamp(p.charge/(profile.duration*profile.target),0,1);p.charge=null;p.follow=.72;if(!p.shotLift)p.jumpV=isFT?0:p.shootKind==='layup'?3.8:3.3;p.stamina=clamp(p.stamina-(p.shootKind==='dunk'?.12:.065)*(.60*(starOf(p).staminaUse||1)),0,1);if(p.shootKind==='dunk')p.dunk=.6;
@@ -1300,12 +1364,12 @@ function resetPossession(id,announce=true){
   players.forEach((p,i)=>{p.x=i===id?-1.2:0.6;p.z=i===id?2.35:-.05;p.vx=p.vz=0;p.yaw=PI;p.charge=null;p.chargeProfile=null;p.chargeMove=0;p.burst=p.defRead=0;p.follow=0;p.shotLift=false;p.landing=0;p.jump=0;p.jumpV=0;p.block=p.reach=p.crossover=p.dunk=p.stun=0;p.gasStun=0;p.skillPose=null;p.skillHand=null;p.skillShot=null;p.held=i===id;p.stamina=clamp(p.stamina+.22,0,1);p.aiWait=.7+Math.random()*.5;p.moveCD=0;p.stealCD=.5;});owner=id;lastOwner=id;
   if(isTeamMode()){
     const team=teamOf(id),mates=players.filter(p=>teamOf(p.id)===team&&p.id!==id),defs=players.filter(p=>teamOf(p.id)!==team);
-    players[id].x=-.7;players[id].z=2.3;
-    mates.forEach((p,n)=>{const spot=mode==='5v5'?[[-4.5,.5],[4.5,.5],[-4.8,-4.2],[4.8,-4.2]][n]:[[-4.7,-.3],[4.7,-.3]][n];p.x=spot[0];p.z=spot[1];});
+    players[id].x=-.7;players[id].z=4.2;
+    mates.forEach((p,n)=>{const spot=mode==='5v5'?[[-4.5,.5],[4.5,.5],[-4.8,-4.2],[4.8,-4.2]][n]:[[-6.6,.8],[6.6,.8]][n];p.x=spot[0];p.z=spot[1];});
     defs.forEach(p=>{const mark=players[p.id^1],d=Math.hypot(hoop.x-mark.x,hoop.z-mark.z)||1;p.x=mark.x+(hoop.x-mark.x)/d*1.15;p.z=mark.z+(hoop.z-mark.z)/d*1.15;p.yaw=Math.atan2(mark.x-p.x,mark.z-p.z);});
     if(mode==='5v5'){
-      players[id].x=-.7;players[id].z=18.3;players[id].yaw=PI;
-      const spots=[[-4.6,14.7],[4.6,14.7],[-3.5,9],[3.5,9]];
+      players[id].x=-.7;players[id].z=24.3;players[id].yaw=PI;
+      const spots=[[-6.7,20.7],[6.7,20.7],[-4.8,12],[4.8,12]];
       mates.forEach((p,n)=>{p.x=spots[n][0];p.z=spots[n][1];p.yaw=PI;});
       defs.forEach(p=>{const mark=players[p.id^1];p.x=mark.x;p.z=mark.z-2.8;p.yaw=0;});
     }
@@ -1323,11 +1387,11 @@ function returnPracticeBall(){
   players.forEach(p=>{p.held=false;p.charge=null;p.chargeProfile=null;p.follow=0;p.dunk=0;p.crossover=0;p.skillPose=null;p.skillHand=null;p.skillShot=null;});
   returnFlight={start:ballPos.clone(),time:0,duration:.52};ballState='returning';ballVel.set(0,0,0);
 }
-function startGame(){resetTouch();mode=document.querySelector('.mode.selected').dataset.mode;attackTeam=0;world.setFullCourt(mode==='5v5',0);fullLook.copy(world.toWorld(new V(0,1,10)));players=playerPool.slice(0,isTeamMode()?teamSize()*2:2);controlledId=0;passFlight=null;athletes.forEach(a=>a.root.visible=false);document.body.classList.toggle('team-mode',isTeamMode());players.forEach(p=>{p.skillHold=null;p.skillDetached=false;p.slowTimer=0;});freeThrows=null;signatureAction=null;world.clearSkillEffects();players.forEach((p,i)=>{applyCharacter(i,selected[i]);p.energy=0;p.magnetCD=0;p.skillPose=null;p.skillShot=null;p.skillHand=null;});mode=document.querySelector('.mode.selected').dataset.mode;ctrl=mode==='pvp'?ctrlPvp:ctrlAi;syncControls();difficulty=$('difficulty').value;score=[0,0];stats=playerPool.map(()=>({attempts:0,made:0,steals:0,blocks:0}));state='playing';syncTouchUI();players.forEach(p=>athletes[p.id].root.visible=mode!=='practice'||p.id===0);meterFeedback=null;gameTime=0;lastBounce=-1;players.forEach(p=>p.stamina=1);resetPossession(0);keys.clear();toastTime=feedbackTime=0;$('feedback').style.opacity=0;$('menu').classList.add('hidden');$('hud').classList.remove('hidden');$('overlay').classList.add('hidden');document.body.classList.add('playing');document.body.classList.toggle('practice',mode==='practice');$('opponent-type').textContent=mode==='pvp'?'PLAYER 02':'CPU';$('target').textContent=mode==='practice'?'OPEN GYM':'FIRST TO 21';$('game-mode-label').textContent=mode==='practice'?'PRACTICE':mode==='5v5'?'FULL COURT · 5v5':isTeamMode()?'3 ON 3':'1 ON 1';$('opponent-name').textContent=mode==='practice'?'自由练球':isTeamMode()?'对手球队':names[1];$('home-name').textContent=isTeamMode()?'你的球队':names[0];athletes[1].root.visible=mode!=='practice';world.quality($('quality').value);net.reset();audioStart();updateHud();}
-function endGame(winner){freeThrows=null;signatureAction=null;world.clearSkillEffects();state='over';resetTouch();syncTouchUI();keys.clear();$('overlay').classList.remove('hidden');$('dialog-eyebrow').textContent='FINAL BUZZER';$('dialog-title').textContent=teamName(winner)+'，拿下球场。';$('dialog-text').textContent=`${score[0]} : ${score[1]} · ${winner===0?'属于你的高光时刻。':'再来一局，找回节奏。'}`;$('resume').classList.add('hidden');$('dialog-stats').classList.remove('hidden');$('dialog-stats').innerHTML=`<div><b>${stats[0].made}/${stats[0].attempts}</b>${names[0]} · 投篮命中</div><div><b>${stats[1].made}/${stats[1].attempts}</b>${names[1]} · 投篮命中</div><div><b>${stats[0].steals+stats[0].blocks}</b>${names[0]} · 抢断 + 盖帽</div><div><b>${stats[1].steals+stats[1].blocks}</b>${names[1]} · 抢断 + 盖帽</div>`;if(isTeamMode()){const total=t=>players.filter(p=>teamOf(p.id)===t).reduce((a,p)=>{for(const k of Object.keys(a))a[k]+=stats[p.id][k];return a;},{made:0,attempts:0,steals:0,blocks:0});$('dialog-stats').innerHTML=[0,1].map(t=>{const a=total(t);return `<div><b>${a.made}/${a.attempts}</b>${t===0?'你的球队':'对手球队'} · 投篮</div><div><b>${a.steals+a.blocks}</b>抢断 + 盖帽</div>`;}).join('');}playTone(523,.25,'triangle',.04);playTone(784,.55,'sine',.03);}
+function startGame(){clearSgaBurst();resetTouch();mode=document.querySelector('.mode.selected').dataset.mode;attackTeam=0;world.setFullCourt(mode==='5v5',0,isTeamMode());fullCameraAngle=0;fullLook.copy(world.toWorld(new V(0,1,10)));players=playerPool.slice(0,isTeamMode()?teamSize()*2:2);controlledId=0;passFlight=null;athletes.forEach(a=>a.root.visible=false);document.body.classList.toggle('team-mode',isTeamMode());players.forEach(p=>{p.skillHold=null;p.skillDetached=false;p.slowTimer=0;});freeThrows=null;signatureAction=null;world.clearSkillEffects();players.forEach((p,i)=>{applyCharacter(i,selected[i]);p.energy=0;p.magnetCD=0;p.skillPose=null;p.skillShot=null;p.skillHand=null;});mode=document.querySelector('.mode.selected').dataset.mode;ctrl=mode==='pvp'?ctrlPvp:ctrlAi;syncControls();difficulty=$('difficulty').value;score=[0,0];stats=playerPool.map(()=>({attempts:0,made:0,steals:0,blocks:0}));state='playing';syncTouchUI();players.forEach(p=>athletes[p.id].root.visible=mode!=='practice'||p.id===0);meterFeedback=null;gameTime=0;lastBounce=-1;players.forEach(p=>p.stamina=1);resetPossession(0);keys.clear();toastTime=feedbackTime=0;$('feedback').style.opacity=0;$('menu').classList.add('hidden');$('hud').classList.remove('hidden');$('overlay').classList.add('hidden');document.body.classList.add('playing');document.body.classList.toggle('practice',mode==='practice');$('opponent-type').textContent=mode==='pvp'?'PLAYER 02':'CPU';$('target').textContent=mode==='practice'?'OPEN GYM':'FIRST TO 21';$('game-mode-label').textContent=mode==='practice'?'PRACTICE':mode==='5v5'?'FULL COURT · 5v5':isTeamMode()?'3 ON 3':'1 ON 1';$('opponent-name').textContent=mode==='practice'?'自由练球':isTeamMode()?'对手球队':names[1];$('home-name').textContent=isTeamMode()?'你的球队':names[0];athletes[1].root.visible=mode!=='practice';world.quality($('quality').value);net.reset();audioStart();updateHud();}
+function endGame(winner){clearSgaBurst();freeThrows=null;signatureAction=null;world.clearSkillEffects();state='over';resetTouch();syncTouchUI();keys.clear();$('overlay').classList.remove('hidden');$('dialog-eyebrow').textContent='FINAL BUZZER';$('dialog-title').textContent=teamName(winner)+'，拿下球场。';$('dialog-text').textContent=`${score[0]} : ${score[1]} · ${winner===0?'属于你的高光时刻。':'再来一局，找回节奏。'}`;$('resume').classList.add('hidden');$('dialog-stats').classList.remove('hidden');$('dialog-stats').innerHTML=`<div><b>${stats[0].made}/${stats[0].attempts}</b>${names[0]} · 投篮命中</div><div><b>${stats[1].made}/${stats[1].attempts}</b>${names[1]} · 投篮命中</div><div><b>${stats[0].steals+stats[0].blocks}</b>${names[0]} · 抢断 + 盖帽</div><div><b>${stats[1].steals+stats[1].blocks}</b>${names[1]} · 抢断 + 盖帽</div>`;if(isTeamMode()){const total=t=>players.filter(p=>teamOf(p.id)===t).reduce((a,p)=>{for(const k of Object.keys(a))a[k]+=stats[p.id][k];return a;},{made:0,attempts:0,steals:0,blocks:0});$('dialog-stats').innerHTML=[0,1].map(t=>{const a=total(t);return `<div><b>${a.made}/${a.attempts}</b>${t===0?'你的球队':'对手球队'} · 投篮</div><div><b>${a.steals+a.blocks}</b>抢断 + 盖帽</div>`;}).join('');}playTone(523,.25,'triangle',.04);playTone(784,.55,'sine',.03);}
 function pause(){if(state!=='playing')return;state='paused';resetTouch();syncTouchUI();meterFeedback=null;keys.clear();players.forEach(p=>p.charge=null);$('shotmeter').classList.add('hidden');$('overlay').classList.remove('hidden');$('dialog-eyebrow').textContent='TAKE A BREATH';$('dialog-title').textContent='中场喘口气。';$('dialog-text').textContent='比赛已暂停。准备好了，就继续你的节奏。';$('resume').classList.remove('hidden');$('dialog-stats').classList.add('hidden');}
 function resume(){if(state!=='paused')return;state='playing';syncTouchUI();keys.clear();$('overlay').classList.add('hidden');audioStart();}
-function backToMenu(){attackTeam=0;world.setFullCourt(false,0);world.clearSkillEffects();state='menu';resetTouch();syncTouchUI();players=playerPool.slice(0,2);controlledId=0;passFlight=null;athletes.forEach((a,i)=>{a.root.visible=i<2;teamAppearance(a,playerPool[i]);});document.body.classList.remove('team-mode');meterFeedback=null;keys.clear();$('overlay').classList.add('hidden');$('hud').classList.add('hidden');$('menu').classList.remove('hidden');document.body.classList.remove('playing','practice');athletes[1].root.visible=true;resetPossession(0,false);players[0].x=1.25;players[0].z=2;players[1].x=3.0;players[1].z=.3;players[0].yaw=.18;players[1].yaw=.3;players[0].held=true;players[1].held=false;drawRoster();}
+function backToMenu(){clearSgaBurst();attackTeam=0;world.setFullCourt(false,0);world.clearSkillEffects();state='menu';resetTouch();syncTouchUI();players=playerPool.slice(0,2);controlledId=0;passFlight=null;athletes.forEach((a,i)=>{a.root.visible=i<2;teamAppearance(a,playerPool[i]);});document.body.classList.remove('team-mode');meterFeedback=null;keys.clear();$('overlay').classList.add('hidden');$('hud').classList.add('hidden');$('menu').classList.remove('hidden');document.body.classList.remove('playing','practice');athletes[1].root.visible=true;resetPossession(0,false);players[0].x=1.25;players[0].z=2;players[1].x=3.0;players[1].z=.3;players[0].yaw=.18;players[1].yaw=.3;players[0].held=true;players[1].held=false;drawRoster();}
 function onScore(){
   if(!shot||shot.scored)return;shot.scored=true;justScored=true;const id=shot.shooter,pts=shot.points;score[teamOf(id)]+=pts;stats[id].made++;net.impulse(ballVel.x,ballVel.z);ballVel.multiplyScalar(.48);ballVel.y=-1.5;ballState='scored';cameraShake=.065;
   if(shot.freeThrow){sound('swish',.65,hoop);finishFreeThrow(true);updateHud();return;}
@@ -1405,12 +1469,12 @@ function teamAIInput(p,dt){
     if(passFlight?.to===p.id)return steer(p,p.x,p.z);
     const holder=players[owner>=0?owner:passFlight.from],mates=teammates(holder),slot=Math.max(0,mates.findIndex(q=>q.id===p.id)),side=slot%2===0?-1:1;
     const inside=starOf(p).finish>starOf(p).three+12,phase=(gameTime+p.id*2.1)%12,cut=cleared&&(mode==='5v5'?Math.floor(gameTime/2.8)%mates.length===slot:phase<2.7)&&distance(holder)>3.7;
-    let tx=side*(cut?1.15:mode==='5v5'?(slot>=2?4.9:4.4):inside?2.6:4.8),tz=cut?-4.6:mode==='5v5'?(slot>=2?-4.1:.4):inside?-2.8:-.25;
+    let tx=side*(cut?1.15:mode==='5v5'?(slot>=2?6.6:6.0):inside?4.0:6.5),tz=cut?-4.6:mode==='5v5'?(slot>=2?-3.9:2.0):inside?-2.2:1.8;
     tx+=Math.sin(gameTime*.62+p.id)*.55;tz+=Math.sin(gameTime*.43+p.id)*.3;
-    if(mode==='5v5'&&holder.z>5){tx=side*(slot>=2?3.2:5.5);tz=Math.max(tz,holder.z-(slot>=2?5.5:2.8));}
+    if(mode==='5v5'&&holder.z>5){tx=side*(slot>=2?4.6:7.2);tz=Math.max(tz,holder.z-(slot>=2?5.5:2.8));}
     const mark=nearestOpponent(p);if(pDist(p,mark)<.95){tx+=side*.65;tz+=.35;}
     if(pDist(p,holder)<1.5){tx+=side;tz+=.5;}
-    return steer(p,clamp(tx,-6.4,6.4),clamp(tz,-5.3,mode==='5v5'?20:3.0),cut&&p.stamina>.45);
+    return steer(p,clamp(tx,-courtMaxX()+.6,courtMaxX()-.6),clamp(tz,-5.3,courtMaxZ()-1.2),cut&&p.stamina>.45);
   }
   if(owner>=0||passFlight){
     const holder=players[owner>=0?owner:passFlight.to];let mark=players[p.id^1];
@@ -1424,7 +1488,7 @@ function teamAIInput(p,dt){
   const ranked=players.filter(q=>sameTeam(q.id,p.id)).sort((a,b)=>Math.hypot(a.x-ballPos.x,a.z-ballPos.z)-Math.hypot(b.x-ballPos.x,b.z-ballPos.z)),rank=ranked.findIndex(q=>q.id===p.id);
   const tx=ballPos.x+(rank?((p.id%4<2?-1:1)*1.15):0),tz=ballPos.z+(rank?.8:0);
   if(ballPos.y>2&&ballPos.y<3.3&&ballVel.y<0&&Math.hypot(tx-p.x,tz-p.z)<.7)doBlock(p);
-  return steer(p,clamp(tx,-7,7),clamp(tz,-6.6,courtMaxZ()),rank===0&&p.stamina>.3);
+  return steer(p,clamp(tx,-courtMaxX()+.1,courtMaxX()-.1),clamp(tz,-6.6,courtMaxZ()),rank===0&&p.stamina>.3);
 }
 function updateTeamPanel(){
   $('team-legend').classList.toggle('hidden',!isTeamMode());
@@ -1442,7 +1506,7 @@ function updatePlayer(p,input,dt){
   p.gasStun=p.gasStun||0;if(p.gasStun>0){input={x:0,z:0,sprint:false};p.vx=p.vz=0;}
   const moving=Math.hypot(input.x,input.z)>.05;p.powerDrive=p.held&&input.sprint&&moving&&starOf(p).strength>=92&&p.stamina>.12&&distance(p)<5;let speed=(input.sprint&&p.stamina>.08?5.0:3.3)*starOf(p).speed*(owner>=0&&!sameTeam(owner,p.id)?1.16:1)*(p.slowTimer>0?.52:1);if(p.charge!==null)speed=.45;if(p.stun>0)speed*=.25;if(p.burst>0&&input.sprint)speed*=1.14;if(p.jump>.05)speed*=.6;if(p.block>0)speed=Math.min(speed,.7);if(p.dunk>0)speed=0;
   const cross=p.crossover>0?Math.sin((1-p.crossover/.46)*PI)*5.4*starOf(p).crossScale:0,accel=p.crossover>0?18+starOf(p).handle*.15:p.charge!==null?18:7+starOf(p).speedRating*.085;const guardSlow=p.stun>0?.3:1;p.vx=lerp(p.vx,input.x*speed+p.crossDX*cross*guardSlow,Math.min(1,dt*accel));p.vz=lerp(p.vz,input.z*speed+p.crossDZ*cross*guardSlow,Math.min(1,dt*accel));p.x+=p.vx*dt;p.z+=p.vz*dt;
-  p.x=clamp(p.x,-7.1,7.1);p.z=clamp(p.z,-6.8,courtMaxZ());p.stride+=Math.hypot(p.vx,p.vz)*dt*4.8;
+  p.x=clamp(p.x,-courtMaxX(),courtMaxX());p.z=clamp(p.z,-6.8,courtMaxZ());p.stride+=Math.hypot(p.vx,p.vz)*dt*4.8;
   p.stamina=clamp(p.stamina+dt*(input.sprint&&moving?-.15*(.60*(starOf(p).staminaUse||1)):(moving?.050:.140)*(starOf(p).recovery||1)),0,1);
   if(Math.hypot(p.vx,p.vz)>.15&&p.charge===null&&p.follow<=0&&p.crossover<=0){let target=Math.atan2(p.vx,p.vz);if(!p.held&&owner>=0){const q=players[owner];target=Math.atan2(q.x-p.x,q.z-p.z);}let diff=((target-p.yaw+PI)%(2*PI)+2*PI)%(2*PI)-PI;p.yaw+=diff*Math.min(1,dt*14);}
   if(p.jump>0||p.jumpV>0){p.jumpV-=GRAVITY*dt;p.jump=Math.max(0,p.jump+p.jumpV*dt);if(p.jump===0){p.jumpV=0;p.landing=.20;}}
@@ -1456,7 +1520,7 @@ function separatePlayers(){
   if(mode==='practice'||ballState==='dunk'||ballState==='backboard')return;
   for(let i=0;i<players.length;i++)for(let j=i+1;j<players.length;j++){
     const a=players[i],b=players[j],dx=b.x-a.x,dz=b.z-a.z,d=Math.hypot(dx,dz),spacing=.32*(starOf(a).width+starOf(b).width);
-    if(d<spacing){const nx=d>.001?dx/d:1,nz=d>.001?dz/d:0,massA=(.6+starOf(a).strength*.024)*(a.powerDrive?1.6:1),massB=(.6+starOf(b).strength*.024)*(b.powerDrive?1.6:1),ka=(spacing-d)*massB/(massA+massB),kb=(spacing-d)*massA/(massA+massB);a.x=clamp(a.x-nx*ka,-7.1,7.1);a.z=clamp(a.z-nz*ka,-6.8,courtMaxZ());b.x=clamp(b.x+nx*kb,-7.1,7.1);b.z=clamp(b.z+nz*kb,-6.8,courtMaxZ());}
+    if(d<spacing){const nx=d>.001?dx/d:1,nz=d>.001?dz/d:0,massA=(.6+starOf(a).strength*.024)*(a.powerDrive?1.6:1),massB=(.6+starOf(b).strength*.024)*(b.powerDrive?1.6:1),ka=(spacing-d)*massB/(massA+massB),kb=(spacing-d)*massA/(massA+massB);a.x=clamp(a.x-nx*ka,-courtMaxX(),courtMaxX());a.z=clamp(a.z-nz*ka,-6.8,courtMaxZ());b.x=clamp(b.x+nx*kb,-courtMaxX(),courtMaxX());b.z=clamp(b.z+nz*kb,-6.8,courtMaxZ());}
   }
 }
 function skillGripPosition(p){
@@ -1575,9 +1639,9 @@ function updateBall(dt,deadBall=false){
   }
   if(ballPos.y<BALL_R){ballPos.y=BALL_R;const impact=Math.abs(ballVel.y);ballVel.y=impact*.72;ballVel.x*=.82;ballVel.z*=.82;if(impact<.3)ballVel.y=0;else bounce(impact);if(ballState==='flight')ballState='loose';}
   if(deadBall||shot?.freeThrow)return;
-  if(Math.abs(ballPos.x)>7.5||ballPos.z>(mode==='5v5'?21.05:7.05)||ballPos.z< -7.2){
+  if(Math.abs(ballPos.x)>courtMaxX()+.4||ballPos.z>courtMaxZ()+.45||ballPos.z< -7.2){
     if(ballState!=='scored'&&resetDelay===0){const id=mode==='practice'?0:(shot&&shot.blocked?lastOwner:otherTeamPlayer(lastOwner));queueReset(id,mode==='practice'?.30:1.0);showToast('OUT OF BOUNDS','出界',mode==='practice'?'回到你的手中，继续当前点位':names[id]+'重新发球',1.0);}
-    ballPos.x=clamp(ballPos.x,-8.0,8.0);ballPos.z=clamp(ballPos.z,-7.5,mode==='5v5'?21.5:7.5);
+    ballPos.x=clamp(ballPos.x,-courtMaxX()-.9,courtMaxX()+.9);ballPos.z=clamp(ballPos.z,-7.5,courtMaxZ()+.9);
   }
   if(ballState==='loose')looseTime+=dt;
   if(resetDelay===0&&mode==='practice'&&liveTime>2.9&&ballState!=='scored')queueReset(0,.10);
@@ -1612,6 +1676,7 @@ function update(dt){
 function meterPoint(t){const u=1-t;return {x:u*u*28+2*u*t*100+t*t*40,y:u*u*198+2*u*t*110+t*t*20};}
 function meterPath(start,end){let d='';const count=28;for(let i=0;i<=count;i++){const p=meterPoint(lerp(start,end,i/count));d+=(i?' L':'M')+p.x.toFixed(2)+','+p.y.toFixed(2);}return d;}
 function updateMeter(dt){
+  if(freeThrows){updateSgaMeter();return;}$('sga-arc-zones').style.display='none';$('meter-zone').style.display='';$('meter-fill').style.display='';
   const active=signatureAction?null:players.find(p=>p.charge!==null&&isHuman(p.id));
   if(meterFeedback&&state==='playing'){meterFeedback.ttl-=dt;if(meterFeedback.ttl<=0)meterFeedback=null;}
   const data=active?(()=>{const s=shotSettings(active);return{id:active.id,profile:active.chargeProfile,window:s.window,contest:s.contest,value:clamp(chargeValue(active),0,1),ttl:1};})():meterFeedback;
@@ -1671,15 +1736,16 @@ function render(dt){
     const pos=new V(5.8+Math.sin(menuTime*.12)*.2,2.7,6.0);camera.position.lerp(pos,Math.min(1,dt*2.5));camera.lookAt(-.5,1.2,1);
   }else{
     if(mode==='5v5'){
-      const focusZ=clamp(ballPos.z-4.5,-.6,16),focus=new V(ballPos.x*.20,1.0,focusZ);
-      let view=new V(ballPos.x*.10,15.4,focusZ+18.0);
-      if(camMode===1)view.set(12.5,17.5,focusZ+13);else if(camMode===2)view.set(0,20,focusZ+15);
-      if(signatureAction){const p=players[signatureAction.shooter];focus.y=1.3+p.jump*.40;view.y+=p.jump*.35;}
-      fullLook.lerp(world.toWorld(focus),Math.min(1,dt*4));camera.position.lerp(world.toWorld(view),Math.min(1,dt*2.6));camera.lookAt(fullLook);
+      const focusZ=clamp(ballPos.z-4.5,-.6,22),focus=new V(ballPos.x*.20,1.0,focusZ);
+      const targetAngle=attackTeam?PI:0,delta=Math.atan2(Math.sin(targetAngle-fullCameraAngle),Math.cos(targetAngle-fullCameraAngle));fullCameraAngle+=delta*(1-Math.exp(-dt*1.05));
+      let radius=22,height=18.5,angle=fullCameraAngle;if(camMode===1){angle+=.55;height=20;}else if(camMode===2){radius=19;height=23;}
+      if(signatureAction){const p=players[signatureAction.shooter];focus.y=1.3+p.jump*.40;height+=p.jump*.35;}
+      fullLook.lerp(world.toWorld(focus),1-Math.exp(-dt*1.65));
+      const view=fullLook.clone().add(new V(Math.sin(angle)*radius,height,Math.cos(angle)*radius));camera.position.lerp(view,1-Math.exp(-dt*3));camera.lookAt(fullLook);
     }else{
     const centerX=owner>=0?players[owner].x*.13:ballPos.x*.11,centerZ=owner>=0?players[owner].z*.09:ballPos.z*.06;
     const pos=camMode===0?new V(centerX,8.2,14.2):camMode===1?new V(11.8,10.4,12.8):new V(centerX,6.7,13.8);
-    camera.position.lerp(pos,Math.min(1,dt*3));camera.lookAt(centerX,.6,-.7+centerZ);
+    if(mode==='3v3'){pos.x*=1.15;pos.y+=2.8;pos.z+=4.2;}camera.position.lerp(pos,Math.min(1,dt*3));camera.lookAt(centerX,.6,(mode==='3v3'?.7:-.7)+centerZ);
     if(signatureAction?.kind==='ma'){const p=players[signatureAction.shooter];camera.position.lerp(new V(p.x*.2+3,11.8,16.8),Math.min(1,dt*4));camera.lookAt(p.x*.4,2.4+p.jump*.28,-1.5);}
     if(signatureAction?.kind==='zhou'){
       const p=players[signatureAction.shooter],t=p.skillPhase,opening=t<.34,dive=t>.77;
